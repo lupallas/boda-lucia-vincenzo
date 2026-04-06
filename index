@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vincenzo & Lucia - Ci Sposiamo!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Homemade+Apple&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #F9F7F5;
+            color: #2D2B25;
+            line-height: 1.6;
+        }
+
+        /* ===== LANGUAGE TOGGLE ===== */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            border: 1px solid #D0C8C0;
+            border-radius: 4px;
+            padding: 8px 12px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .language-toggle button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #525252;
+            padding: 4px 8px;
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle button.active {
+            color: #4460F3;
+        }
+
+        .language-toggle svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #F9F7F5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Fondo con texto repetido */
+        .hero-background-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Homemade Apple', cursive;
+            font-size: 48px;
+            color: rgba(224, 224, 224, 0.15);
+            overflow: hidden;
+            pointer-events: none;
+            line-height: 1.8;
+        }
+
+        .hero-background-text span {
+            display: block;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Contenedor central del sobre */
+        .envelope-container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .envelope-container.hidden {
+            opacity: 0;
+            transform: translateY(-100px) scale(0.8);
+            pointer-events: none;
+        }
+
+        /* Elementos decorativos laterales */
+        .decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.8;
+        }
+
+        .cake {
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .rings {
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .cake img,
+        .rings img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Sobre y contenido */
+        .envelope-wrapper {
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .envelope {
+            width: 380px;
+            height: 280px;
+            position: relative;
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
+            animation: floatEnvelope 3s ease-in-out infinite;
+        }
+
+        @keyframes floatEnvelope {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .envelope img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Texto sobre el sobre */
+        .envelope-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 320px;
+            z-index: 20;
+        }
+
+        .save-the-date {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #525252;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .names {
+            font-family: 'Homemade Apple', cursive;
+            font-size: 52px;
+            color: #2D2B25;
+            margin-bottom: 18px;
+            line-height: 1.2;
+        }
+
+        .dates {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 12px;
+            color: #525252;
+            letter-spacing: 1px;
+        }
+
+        .dates span {
+            display: inline-block;
+        }
+
+        .dates span:first-child {
+            margin-right: 8px;
+        }
+
+        .dates span:last-child {
+            margin-left: 8px;
+        }
+
+        /* Subtítulo bajo el sobre */
+        .subtitle {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #525252;
+            margin-top: 20px;
+        }
+
+        /* Vista secundaria (después del scroll) */
+        .secondary-view {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .secondary-view.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .secondary-title {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #525252;
+            margin-bottom: 30px;
+        }
+
+        .bride-groom-names {
+            font-family: 'Homemade Apple', cursive;
+            font-size: 64px;
+            color: #2D2B25;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .bride-groom-names .ampersand {
+            font-size: 48px;
+            color: #4460F3;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .secondary-subtitle {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #525252;
+        }
+
+        /* ===== BOTTOM NAVIGATION ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4460F3;
+            padding: 16px 0;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+        }
+
+        .bottom-nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .bottom-nav a:hover {
+            color: #FFFFFF;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .language-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 6px 10px;
+            }
+
+            .language-toggle button {
+                font-size: 12px;
+            }
+
+            .decoration {
+                width: 60px;
+                height: 60px;
+            }
+
+            .cake {
+                left: 20px;
+            }
+
+            .rings {
+                right: 20px;
+            }
+
+            .envelope {
+                width: 280px;
+                height: 210px;
+            }
+
+            .envelope-text {
+                width: 240px;
+            }
+
+            .save-the-date {
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
+
+            .names {
+                font-size: 40px;
+            }
+
+            .subtitle {
+                font-size: 11px;
+            }
+
+            .bride-groom-names {
+                font-size: 48px;
+            }
+
+            .bottom-nav {
+                padding: 12px 0;
+                gap: 30px;
+            }
+
+            .bottom-nav a {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .decoration {
+                display: none;
+            }
+
+            .envelope {
+                width: 240px;
+                height: 180px;
+            }
+
+            .envelope-text {
+                width: 200px;
+            }
+
+            .names {
+                font-size: 32px;
+            }
+
+            .bride-groom-names {
+                font-size: 36px;
+            }
+
+            .bottom-nav {
+                gap: 20px;
+                padding: 10px 0;
+            }
+
+            .bottom-nav a {
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LANGUAGE TOGGLE -->
+    <div class="language-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <button class="lang-btn active" data-lang="it">IT</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Fondo de texto decorativo -->
+            <div class="hero-background-text">
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+            </div>
+
+            <!-- Decoraciones laterales -->
+            <div class="decoration cake">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake decoration">
+            </div>
+            <div class="decoration rings">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="Rings decoration">
+            </div>
+
+            <!-- Contenedor del sobre (animado) -->
+            <div class="envelope-container" id="envelopeContainer">
+                <!-- Sobre con texto superpuesto -->
+                <div class="envelope-wrapper">
+                    <div class="envelope">
+                        <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png" alt="Invitation Envelope">
+                    </div>
+                    <div class="envelope-text">
+                        <div class="save-the-date" data-it="SAVE THE DATE" data-es="SAVE THE DATE"></div>
+                        <div class="names">
+                            <div data-it="Vincenzo" data-es="Vincenzo">Vincenzo</div>
+                            <div data-it="& Lucia" data-es="& Lucia">& Lucia</div>
+                        </div>
+                        <div class="dates">
+                            <span data-it="21.06.25" data-es="21.06.25">21.06.25</span>
+                            <span>|</span>
+                            <span data-it="04.07.25" data-es="04.07.25">04.07.25</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!"></div>
+            </div>
+
+            <!-- Vista secundaria (nombres grandes) -->
+            <div class="secondary-view" id="secondaryView">
+                <div class="secondary-title" data-it="SIETE INVITATI" data-es="ESTÁN INVITADOS"></div>
+                <div class="bride-groom-names">
+                    <div data-it="Vincenzo" data-es="Vincenzo">Vincenzo</div>
+                    <span class="ampersand">&</span>
+                    <div data-it="Lucia" data-es="Lucia">Lucia</div>
+                </div>
+                <div class="secondary-subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <a href="#location" data-it="LOCATION" data-es="UBICACIÓN">LOCATION</a>
+        <a href="#dresscode" data-it="DRESS CODE" data-es="DRESS CODE">DRESS CODE</a>
+        <a href="#regali" data-it="REGALI" data-es="REGALOS">REGALI</a>
+        <a href="#rsvp" data-it="RSVP" data-es="RSVP">RSVP</a>
+    </nav>
+
+    <script>
+        // ===== LANGUAGE MANAGEMENT =====
+        const langButtons = document.querySelectorAll('.lang-btn');
+        let currentLanguage = localStorage.getItem('language') || 'it';
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('language', lang);
+
+            // Actualizar botones activos
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Actualizar textos
+            document.querySelectorAll('[data-it][data-es]').forEach(el => {
+                el.textContent = el.dataset[lang];
+            });
+        }
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+
+        // Inicializar idioma
+        setLanguage(currentLanguage);
+
+        // ===== SCROLL ANIMATION =====
+        const envelopeContainer = document.getElementById('envelopeContainer');
+        const secondaryView = document.getElementById('secondaryView');
+        const hero = document.querySelector('.hero');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const heroHeight = hero.offsetHeight;
+            const scrollPercent = Math.min(scrollTop / (heroHeight * 0.3), 1);
+
+            if (scrollPercent > 0.1) {
+                envelopeContainer.classList.add('hidden');
+                secondaryView.classList.add('visible');
+            } else {
+                envelopeContainer.classList.remove('hidden');
+                secondaryView.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
