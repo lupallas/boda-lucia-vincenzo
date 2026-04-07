@@ -140,8 +140,8 @@
 
         .cake img,
         .rings img {
-            width: 150%;
-            height: 150%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
         }
 
@@ -152,7 +152,7 @@
         }
 
         .envelope {
-            width: calc(80vh * 1.357);
+            width: calc(70vh * 1.357);
             height: 70vh;
             position: relative;
             filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
@@ -223,32 +223,28 @@
             margin-left: 8px;
         }
 
-        /* Subtítulo bajo el sobre */
-        .subtitle {
+        /* Subtítulo dentro del sobre */
+        .envelope-subtitle {
             font-family: 'Work Sans', sans-serif;
             font-size: 13px;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: #525252;
-            margin-top: 20px;
+            margin-top: 12px;
+            font-weight: 600;
         }
 
-        /* Vista secundaria (después del scroll) */
+        /* Vista secundaria - contenedor con nombres gigantes */
         .secondary-view {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
+            z-index: 10;
             text-align: center;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .secondary-view.visible {
-            opacity: 1;
-            pointer-events: auto;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .secondary-title {
@@ -264,15 +260,16 @@
             font-family: 'Homemade Apple', cursive;
             font-size: 128px;
             color: #2D2B25;
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 20px;
+            width: 100%;
         }
 
         .bride-groom-names .ampersand {
             font-size: 96px;
             color: #4460F3;
             display: inline-block;
-            margin: 0 10px;
+            margin: 0 20px;
         }
 
         .secondary-subtitle {
@@ -310,6 +307,21 @@
 
         .bottom-nav a:hover {
             color: #FFFFFF;
+        }
+
+        /* Estilo RSVP resaltado */
+        .bottom-nav a[href="#rsvp"] {
+            background-color: white;
+            color: #4460F3;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav a[href="#rsvp"]:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-1px);
         }
 
         /* ===== RESPONSIVE ===== */
@@ -360,11 +372,11 @@
             }
 
             .bride-groom-names {
-                font-size: 72px;
+                font-size: 80px;
             }
 
             .bride-groom-names .ampersand {
-                font-size: 54px;
+                font-size: 60px;
             }
 
             .bottom-nav {
@@ -464,13 +476,35 @@
                             <span>|</span>
                             <span data-it="04.07.25" data-es="04.07.25">04.07.25</span>
                         </div>
+                        <div class="envelope-subtitle" data-it="¡NOS CASAMOS!" data-es="¡NOS CASAMOS!"></div>
                     </div>
                 </div>
-                <div class="subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEGUNDA PANTALLA CON NOMBRES GIGANTES (sin sobre) -->
+    <section class="hero hero-secondary" id="heroSecondary">
+        <div class="hero-content">
+            <!-- Fondo de texto decorativo -->
+            <div class="hero-background-text">
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
+                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
             </div>
 
-            <!-- Vista secundaria (nombres grandes) -->
-            <div class="secondary-view" id="secondaryView">
+            <!-- Decoraciones laterales -->
+            <div class="decoration cake">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake decoration">
+            </div>
+            <div class="decoration rings">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="Rings decoration">
+            </div>
+
+            <!-- Contenedor con nombres gigantes (en el mismo lugar que el sobre) -->
+            <div class="secondary-view">
                 <div class="secondary-title" data-it="SIETE INVITATI" data-es="ESTÁN INVITADOS"></div>
                 <div class="bride-groom-names">
                     <div data-it="Vincenzo" data-es="Vincenzo">Vincenzo</div>
@@ -519,20 +553,17 @@
 
         // ===== SCROLL ANIMATION =====
         const envelopeContainer = document.getElementById('envelopeContainer');
-        const secondaryView = document.getElementById('secondaryView');
         const hero = document.querySelector('.hero');
 
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const heroHeight = hero.offsetHeight;
-            const scrollPercent = Math.min(scrollTop / (heroHeight * 0.3), 1);
-
-            if (scrollPercent > 0.1) {
+            
+            // Ocultar el sobre cuando scrolleas más allá de un 10% del hero
+            if (scrollTop > heroHeight * 0.1) {
                 envelopeContainer.classList.add('hidden');
-                secondaryView.classList.add('visible');
             } else {
                 envelopeContainer.classList.remove('hidden');
-                secondaryView.classList.remove('visible');
             }
         });
     </script>
