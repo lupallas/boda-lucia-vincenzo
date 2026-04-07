@@ -272,12 +272,149 @@
             margin: 0 20px;
         }
 
-        .secondary-subtitle {
+        /* ===== SAVE THE DATE SECTION ===== */
+        .save-the-date-section {
+            width: 100%;
+            background-color: #F9F7F5;
+            padding: 120px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .location-container {
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .location-title {
+            font-family: 'Homemade Apple', cursive;
+            font-size: 48px;
+            color: #4460F3;
+            margin-bottom: 40px;
+            line-height: 1.2;
+            font-weight: 400;
+        }
+
+        .location-description {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: #525252;
+            margin-bottom: 60px;
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .events-container {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 60px;
+            width: 100%;
+        }
+
+        .event-card {
+            flex: 0 1 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .event-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 48px;
+            color: #2D2B25;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .event-date.blue {
+            color: #4460F3;
+        }
+
+        .event-label {
             font-family: 'Work Sans', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
+            color: #525252;
             letter-spacing: 2px;
             text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .event-location {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: #2D2B25;
+            font-weight: 400;
+        }
+
+        .events-divider {
+            width: 1px;
+            height: 120px;
+            background-color: #D0C8C0;
+            align-self: center;
+        }
+
+        /* ===== EL GRANDE GIORNO SECTION ===== */
+        .grande-giorno {
+            width: 100%;
+            background-color: #F9F7F5;
+            padding: 80px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grande-giorno-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .grande-giorno-image {
+            flex: 0 0 auto;
+            width: 400px;
+        }
+
+        .grande-giorno-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            transform: rotate(-8deg);
+            box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+
+        .grande-giorno-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .grande-giorno-title {
+            font-family: 'Homemade Apple', cursive;
+            font-size: 40px;
+            color: #4460F3;
+            line-height: 1.2;
+            font-weight: 400;
+        }
+
+        .grande-giorno-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
             color: #525252;
+            line-height: 1.9;
+            max-width: 600px;
         }
 
         /* ===== BOTTOM NAVIGATION ===== */
@@ -334,6 +471,62 @@
 
             .language-toggle button {
                 font-size: 12px;
+            }
+
+            .location {
+                padding: 80px 20px;
+                min-height: auto;
+            }
+
+            .location-title {
+                font-size: 40px;
+                margin-bottom: 30px;
+            }
+
+            .location-description {
+                font-size: 18px;
+                margin-bottom: 40px;
+            }
+
+            .events-container {
+                gap: 30px;
+            }
+
+            .event-card {
+                flex: 0 1 200px;
+            }
+
+            .event-date {
+                font-size: 36px;
+            }
+
+            .event-location {
+                font-size: 16px;
+            }
+
+            .events-divider {
+                height: 100px;
+            }
+
+            .grande-giorno {
+                padding: 60px 20px;
+            }
+
+            .grande-giorno-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .grande-giorno-image {
+                width: 300px;
+            }
+
+            .grande-giorno-title {
+                font-size: 32px;
+            }
+
+            .grande-giorno-text {
+                font-size: 18px;
             }
 
             .decoration {
@@ -415,16 +608,62 @@
                 font-size: 36px;
             }
 
-            .bottom-nav {
-                gap: 20px;
-                padding: 10px 0;
+            .location {
+                padding: 40px 15px;
             }
 
-            .bottom-nav a {
-                font-size: 9px;
-                letter-spacing: 1px;
+            .location-title {
+                font-size: 32px;
+                margin-bottom: 20px;
             }
-        }
+
+            .location-description {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            .events-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .event-card {
+                flex: 0 1 auto;
+            }
+
+            .event-date {
+                font-size: 32px;
+            }
+
+            .event-location {
+                font-size: 14px;
+            }
+
+            .events-divider {
+                width: 80px;
+                height: 1px;
+            }
+
+            .grande-giorno {
+                padding: 40px 15px;
+            }
+
+            .grande-giorno-container {
+                gap: 30px;
+            }
+
+            .grande-giorno-image {
+                width: 250px;
+            }
+
+            .grande-giorno-title {
+                font-size: 32px;
+            }
+
+            .grande-giorno-text {
+                font-size: 16px;
+                line-height: 1.7;
+            }
     </style>
 </head>
 <body>
@@ -438,8 +677,8 @@
         <button class="lang-btn" data-lang="es">ES</button>
     </div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
+    <!-- HERO - SOBRE -->
+    <section class="hero hero-envelope">
         <div class="hero-content">
             <!-- Fondo de texto decorativo -->
             <div class="hero-background-text">
@@ -484,7 +723,7 @@
     </section>
 
     <!-- SEGUNDA PANTALLA CON NOMBRES GIGANTES (sin sobre) -->
-    <section class="hero hero-secondary" id="heroSecondary">
+    <section class="hero hero-secondary" id="hero">
         <div class="hero-content">
             <!-- Fondo de texto decorativo -->
             <div class="hero-background-text">
@@ -523,6 +762,53 @@
         <a href="#regali" data-it="REGALI" data-es="REGALOS">REGALI</a>
         <a href="#rsvp" data-it="RSVP" data-es="RSVP">RSVP</a>
     </nav>
+
+    <!-- SAVE THE DATE SECTION -->
+    <section class="save-the-date-section" id="save-the-date">
+        <div class="location-container">
+            <!-- Título -->
+            <h1 class="location-title">Save the date</h1>
+
+            <!-- Descripción -->
+            <p class="location-description" data-it="La nostra boda si divide in due momenti speciali. La cerimonia civile sarà a Cesena, Italia, e la festa ufficiale sarà a Maiorca, Spagna. Vi raccontiamo tutto qui sotto!" data-es="Nuestra boda se divide en dos momentos especiales. La ceremonia civil será en Cesena, Italia, y la fiesta oficial será en Mallorca, España. ¡Os contamos todo aquí abajo!">Nuestra boda se divide en dos momentos especiales. La ceremonia civil será en Cesena, Italia, y la fiesta oficial será en Mallorca, España. ¡Os contamos todo aquí abajo!</p>
+
+            <!-- Dos columnas: Civil y Party -->
+            <div class="events-container">
+                <!-- Columna izquierda: Ceremonia Civil -->
+                <div class="event-card">
+                    <div class="event-date" data-it="21.06.26" data-es="21.06.26">21.06.26</div>
+                    <div class="event-label" data-it="CERIMONIA CIVILE" data-es="CEREMONIA CIVIL">CEREMONIA CIVIL</div>
+                    <div class="event-location" data-it="Cesena, Italia" data-es="Cesena, Italia">Cesena, Italia</div>
+                </div>
+
+                <!-- Separador vertical -->
+                <div class="events-divider"></div>
+
+                <!-- Columna derecha: Party -->
+                <div class="event-card">
+                    <div class="event-date blue" data-it="04.07.26" data-es="04.07.26">04.07.26</div>
+                    <div class="event-label" data-it="FESTA!!" data-es="PARTY!!">PARTY!!</div>
+                    <div class="event-location" data-it="Maiorca, Spagna" data-es="Mallorca, España">Mallorca, España</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EL GRANDE GIORNO SECTION -->
+    <section class="grande-giorno" id="grande-giorno">
+        <div class="grande-giorno-container">
+            <!-- Foto con rotación -->
+            <div class="grande-giorno-image">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/pareja%20foto%20intermedio.JPG" alt="Pareja">
+            </div>
+
+            <!-- Contenido de texto -->
+            <div class="grande-giorno-content">
+                <h2 class="grande-giorno-title" data-it="il grande giorno" data-es="el gran día">el gran día</h2>
+                <p class="grande-giorno-text" data-it="A Natale 2017 abbiamo ricevuto il regalo più bello che potessimo immaginare. Nel bel mezzo di un'avventura in Cina ci siamo conosciuti. Dopo anni di vita in tanti paesi, traslochi inaspettati e tempo trascorso lontani, è arrivato il momento di dire il sì. Questi anni di avventure per il mondo ci hanno fatto incontrare persone meravigliose lungo il cammino. Tu sei una di queste persone, e per questo vogliamo condividere questo momento con te." data-es="En Navidad 2017 recibimos el regalo más bonito que podíamos imaginar. En medio de una aventura en China nos conocimos. Después de años de vida en muchos países, mudanzas inesperadas y tiempo apartados, ha llegado el momento de decir el sí. Estos años de aventuras por el mundo nos han hecho encontrar personas maravillosas en el camino. Tú eres una de estas personas, y por eso queremos compartir este momento contigo.">En Navidad 2017 recibimos el regalo más bonito que podíamos imaginar. En medio de una aventura en China nos conocimos. Después de años de vida en muchos países, mudanzas inesperadas y tiempo apartados, ha llegado el momento de decir el sí. Estos años de aventuras por el mundo nos han hecho encontrar personas maravillosas en el camino. Tú eres una de estas personas, y por eso queremos compartir este momento contigo.</p>
+            </div>
+        </div>
+    </section>
 
     <script>
         // ===== LANGUAGE MANAGEMENT =====
