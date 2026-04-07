@@ -466,66 +466,83 @@
         .location-italia {
             width: 100%;
             background-color: #F9F7F5;
-            padding: 80px 40px;
+            padding: 120px 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            position: relative;
+            min-height: auto;
         }
 
         .location-italia-container {
             max-width: 1200px;
             width: 100%;
             display: flex;
-            flex-direction: column;
-            gap: 60px;
-            position: relative;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Grid de 2 columnas */
+        .location-italia-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        /* Columna izquierda */
+        .location-italia-left {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Columna derecha */
+        .location-italia-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        /* Título Italia */
         .location-italia-title {
             font-family: 'Homemade Apple', cursive;
-            font-size: 50px;
+            font-size: 80px;
             color: #2D2B25;
             line-height: 1.1;
             font-weight: 400;
             margin: 0;
         }
 
-        .location-italia-decoration {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            width: 100px;
-            height: 100px;
-            opacity: 0.8;
+        /* Imagen decorativa */
+        .location-italia-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .location-italia-decoration img {
+        .location-italia-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        .location-italia-content {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            margin-top: 60px;
-        }
-
+        /* Ceremony Section */
         .ceremony-section {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            max-width: 900px;
         }
 
         .ceremony-title {
             font-family: 'Work Sans', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             color: #2D2B25;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 600;
             margin: 0;
@@ -533,15 +550,15 @@
 
         .ceremony-description {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 18px;
             color: #525252;
             line-height: 1.9;
             margin: 0;
         }
 
+        /* Details Row */
         .ceremony-details {
             display: flex;
-            align-items: flex-end;
             gap: 80px;
             flex-wrap: wrap;
         }
@@ -550,6 +567,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            flex: 0 0 auto;
         }
 
         .detail-label {
@@ -564,104 +582,128 @@
 
         .detail-value {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            color: #525252;
+            font-size: 17px;
+            color: #2D2B25;
             margin: 0;
+            font-weight: 400;
         }
 
+        /* Come Arrivare Button */
         .come-arrivare-button {
             background-color: #4460F3;
             color: white;
-            padding: 14px 28px;
+            padding: 16px 32px;
             border: none;
-            border-radius: 2px;
+            border-radius: 0;
             font-family: 'Work Sans', sans-serif;
             font-size: 12px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
             transition: all 0.3s ease;
+            white-space: nowrap;
+            width: 100%;
         }
 
         .come-arrivare-button:hover {
             background-color: #3350d4;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(68, 96, 243, 0.3);
+            box-shadow: 0 6px 16px rgba(68, 96, 243, 0.35);
         }
 
         .come-arrivare-button svg {
-            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
         }
 
         /* ===== LOCATION ESPAÑA SECTION ===== */
         .location-espana {
             width: 100%;
             background-color: #F9F7F5;
-            padding: 80px 40px;
+            padding: 120px 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            position: relative;
+            min-height: auto;
         }
 
         .location-espana-container {
             max-width: 1200px;
             width: 100%;
             display: flex;
-            flex-direction: column;
-            gap: 60px;
-            position: relative;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* Grid de 2 columnas */
+        .location-espana-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        /* Columna izquierda */
+        .location-espana-left {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Columna derecha */
+        .location-espana-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        /* Título España */
         .location-espana-title {
             font-family: 'Homemade Apple', cursive;
-            font-size: 50px;
+            font-size: 80px;
             color: #2D2B25;
             line-height: 1.1;
             font-weight: 400;
             margin: 0;
         }
 
-        .location-espana-decoration {
-            position: absolute;
-            top: 40px;
-            right: 40px;
-            width: 100px;
-            height: 100px;
-            opacity: 0.8;
+        /* Imagen decorativa */
+        .location-espana-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .location-espana-decoration img {
+        .location-espana-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        .location-espana-content {
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-            margin-top: 60px;
-        }
-
+        /* Party Section */
         .party-section {
             display: flex;
             flex-direction: column;
             gap: 20px;
-            max-width: 900px;
         }
 
         .party-title {
             font-family: 'Work Sans', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             color: #2D2B25;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 600;
             margin: 0;
@@ -669,46 +711,17 @@
 
         .party-description {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
+            font-size: 18px;
             color: #525252;
             line-height: 1.9;
             margin: 0;
         }
 
+        /* Details Row */
         .party-details {
             display: flex;
-            align-items: flex-end;
             gap: 80px;
             flex-wrap: wrap;
-        }
-
-        .come-arrivare-button-espana {
-            background-color: #4460F3;
-            color: white;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 2px;
-            font-family: 'Work Sans', sans-serif;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .come-arrivare-button-espana:hover {
-            background-color: #3350d4;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(68, 96, 243, 0.3);
-        }
-
-        .come-arrivare-button-espana svg {
-            margin-right: 8px;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -780,42 +793,48 @@
                 font-size: 18px;
             }
 
-            .location-italia-title {
-                font-size: 40px;
+            .location-italia {
+                padding: 60px 20px;
             }
 
-            .location-italia-decoration {
-                width: 80px;
-                height: 80px;
+            .location-italia-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .location-italia-title {
+                font-size: 50px;
+            }
+
+            .location-italia-image {
+                width: 150px;
+                height: 150px;
             }
 
             .ceremony-details {
                 gap: 40px;
             }
 
-            .ceremony-description {
-                font-size: 18px;
+            .location-espana {
+                padding: 60px 20px;
             }
 
-            .detail-value {
-                font-size: 16px;
+            .location-espana-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
 
             .location-espana-title {
-                font-size: 40px;
+                font-size: 50px;
             }
 
-            .location-espana-decoration {
-                width: 80px;
-                height: 80px;
+            .location-espana-image {
+                width: 150px;
+                height: 150px;
             }
 
             .party-details {
                 gap: 40px;
-            }
-
-            .party-description {
-                font-size: 18px;
             }
 
             .decoration {
@@ -1027,6 +1046,7 @@
                 padding: 12px 20px;
                 font-size: 11px;
             }
+        }
     </style>
 </head>
 <body>
@@ -1118,50 +1138,7 @@
         </div>
     </section>
 
-    <!-- LOCATION ESPAÑA SECTION -->
-    <section class="location-espana" id="location-espana">
-        <div class="location-espana-container">
-            <!-- Título España -->
-            <h2 class="location-espana-title" data-it="Spagna" data-es="España">España</h2>
-
-            <!-- Decoración torta arriba a la derecha -->
-            <div class="location-espana-decoration">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake">
-            </div>
-
-            <!-- Contenido principal -->
-            <div class="location-espana-content">
-                <!-- Sección Party -->
-                <div class="party-section">
-                    <h3 class="party-title" data-it="FESTA" data-es="PARTY">PARTY</h3>
-                    <p class="party-description" data-it="La festa ufficiale! La nostra festa sarà al portals hills boutiquehotel un luogo magico tra le colline e il mare di Maiorca. Preparati per una notte indimenticabile!" data-es="¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!">¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!</p>
-                </div>
-
-                <!-- Fila con Fecha & Hora y Lugar -->
-                <div class="party-details">
-                    <div class="detail-item">
-                        <h4 class="detail-label" data-it="FECHA & HORA" data-es="FECHA & HORA">FECHA & HORA</h4>
-                        <p class="detail-value" data-it="Sábado 4 de Julio, 2026 | 18:00" data-es="Sábado 4 de Julio, 2026 | 18:00">Sábado 4 de Julio, 2026 | 18:00</p>
-                    </div>
-
-                    <div class="detail-item">
-                        <h4 class="detail-label" data-it="LUGAR" data-es="LUGAR">LUGAR</h4>
-                        <p class="detail-value" data-it="Portals Hills Boutique Hotel" data-es="Portals Hills Boutique Hotel">Portals Hills Boutique Hotel</p>
-                    </div>
-
-                    <a href="https://maps.app.goo.gl/3pxMvAdWob2FMUHS8" target="_blank" class="come-arrivare-button-espana">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        <span data-it="COME ARRIVARE" data-es="CÓMO LLEGAR">COME ARRIVARE</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BOTTOM NAVIGATION -->
+    <!-- SAVE THE DATE SECTION -->
     <section class="save-the-date-section" id="save-the-date">
         <div class="location-container">
             <!-- Título -->
@@ -1211,36 +1188,43 @@
     <!-- LOCATION ITALIA SECTION -->
     <section class="location-italia" id="location-italia">
         <div class="location-italia-container">
-            <!-- Título Italia -->
-            <h2 class="location-italia-title" data-it="Italia" data-es="Italia">Italia</h2>
+            <!-- Contenedor de 2 columnas -->
+            <div class="location-italia-grid">
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="location-italia-left">
+                    <!-- Título Italia -->
+                    <h2 class="location-italia-title" data-it="Italia" data-es="Italia">Italia</h2>
 
-            <!-- Decoración anillos arriba a la derecha -->
-            <div class="location-italia-decoration">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="Rings">
-            </div>
+                    <!-- Sección Ceremonia -->
+                    <div class="ceremony-section">
+                        <h3 class="ceremony-title" data-it="CERIMONIA" data-es="CEREMONIA">CERIMONIA</h3>
+                        <p class="ceremony-description" data-it="La cerimonia si celebrerà nel Comune di Cesena, poi faremo un brindis. Tieni presente che il 21 giugno è il giorno della festa patronale di Cesena: il centro sarà trafficato, ma è una grande opportunità per vedere la città." data-es="La ceremonia se celebrará en el Comune de Cesena, luego haremos un brindis. Ten en cuenta que el 21 de junio es el día de la fiesta patronal de Cesena: el centro estará abarrotado, pero es una gran oportunidad para ver la ciudad.">La ceremonia se celebrará en el Comune de Cesena, luego haremos un brindis. Ten en cuenta que el 21 de junio es el día de la fiesta patronal de Cesena: el centro estará abarrotado, pero es una gran oportunidad para ver la ciudad.</p>
+                    </div>
 
-            <!-- Contenido principal -->
-            <div class="location-italia-content">
-                <!-- Sección Ceremonia -->
-                <div class="ceremony-section">
-                    <h3 class="ceremony-title" data-it="CERIMONIA" data-es="CEREMONIA">CEREMONIA</h3>
-                    <p class="ceremony-description" data-it="La cerimonia si celebrerà nel Comune di Cesena, poi faremo un brindis. Tieni presente che il 21 giugno è il giorno della festa patronale di Cesena: il centro sarà trafficato, ma è una grande opportunità per vedere la città." data-es="La ceremonia se celebrará en el Comune de Cesena, luego haremos un brindis. Ten en cuenta que el 21 de junio es el día de la fiesta patronal de Cesena: el centro estará abarrotado, pero es una gran oportunidad para ver la ciudad.">La ceremonia se celebrará en el Comune de Cesena, luego haremos un brindis. Ten en cuenta que el 21 de junio es el día de la fiesta patronal de Cesena: el centro estará abarrotado, pero es una gran oportunidad para ver la ciudad.</p>
+                    <!-- Fila con Fecha & Hora y Lugar -->
+                    <div class="ceremony-details">
+                        <div class="detail-item">
+                            <h4 class="detail-label" data-it="FECHA & HORA" data-es="FECHA & HORA">FECHA & HORA</h4>
+                            <p class="detail-value" data-it="Domingo 21 de Junio, 2026 | 11:30" data-es="Domingo 21 de Junio, 2026 | 11:30">Domingo 21 de Junio, 2026 | 11:30</p>
+                        </div>
+
+                        <div class="detail-item">
+                            <h4 class="detail-label" data-it="LUGAR" data-es="LUGAR">LUGAR</h4>
+                            <p class="detail-value" data-it="Sala degli Specchi, Comune Cesena" data-es="Sala degli Specchi, Comune Cesena">Sala degli Specchi, Comune Cesena</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Fila con Fecha & Hora y Lugar -->
-                <div class="ceremony-details">
-                    <div class="detail-item">
-                        <h4 class="detail-label" data-it="FECHA & HORA" data-es="FECHA & HORA">FECHA & HORA</h4>
-                        <p class="detail-value" data-it="Domingo 21 de Junio, 2026 | 11:30" data-es="Domingo 21 de Junio, 2026 | 11:30">Domingo 21 de Junio, 2026 | 11:30</p>
+                <!-- COLUMNA DERECHA -->
+                <div class="location-italia-right">
+                    <!-- Imagen decorativa -->
+                    <div class="location-italia-image">
+                        <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="Rings">
                     </div>
 
-                    <div class="detail-item">
-                        <h4 class="detail-label" data-it="LUGAR" data-es="LUGAR">LUGAR</h4>
-                        <p class="detail-value" data-it="Sala degli Specchi, Comune Cesena" data-es="Sala degli Specchi, Comune Cesena">Sala degli Specchi, Comune Cesena</p>
-                    </div>
-
-                    <a href="https://share.google/cJ0CD18FSPdHWMTsC" target="_blank" class="come-arrivare-button">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                    <!-- Botón COME ARRIVARE -->
+                    <a href="https://maps.app.goo.gl/HZz5tJQE8K9Z1QF77" target="_blank" class="come-arrivare-button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
@@ -1254,36 +1238,43 @@
     <!-- LOCATION ESPAÑA SECTION -->
     <section class="location-espana" id="location-espana">
         <div class="location-espana-container">
-            <!-- Título España -->
-            <h2 class="location-espana-title" data-it="Spagna" data-es="España">España</h2>
+            <!-- Contenedor de 2 columnas -->
+            <div class="location-espana-grid">
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="location-espana-left">
+                    <!-- Título España -->
+                    <h2 class="location-espana-title" data-it="Spagna" data-es="España">España</h2>
 
-            <!-- Decoración torta arriba a la derecha -->
-            <div class="location-espana-decoration">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake">
-            </div>
+                    <!-- Sección Party -->
+                    <div class="party-section">
+                        <h3 class="party-title" data-it="FESTA" data-es="PARTY">PARTY</h3>
+                        <p class="party-description" data-it="La festa ufficiale! La nostra festa sarà al portals hills boutiquehotel un luogo magico tra le colline e il mare di Maiorca. Preparati per una notte indimenticabile!" data-es="¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!">¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!</p>
+                    </div>
 
-            <!-- Contenido principal -->
-            <div class="location-espana-content">
-                <!-- Sección Party -->
-                <div class="party-section">
-                    <h3 class="party-title" data-it="FESTA" data-es="PARTY">PARTY</h3>
-                    <p class="party-description" data-it="La festa ufficiale! La nostra festa sarà al portals hills boutiquehotel un luogo magico tra le colline e il mare di Maiorca. Preparati per una notte indimenticabile!" data-es="¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!">¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!</p>
+                    <!-- Fila con Fecha & Hora y Lugar -->
+                    <div class="party-details">
+                        <div class="detail-item">
+                            <h4 class="detail-label" data-it="FECHA & HORA" data-es="FECHA & HORA">FECHA & HORA</h4>
+                            <p class="detail-value" data-it="Sábado 4 de Julio, 2026 | 18:00" data-es="Sábado 4 de Julio, 2026 | 18:00">Sábado 4 de Julio, 2026 | 18:00</p>
+                        </div>
+
+                        <div class="detail-item">
+                            <h4 class="detail-label" data-it="LUGAR" data-es="LUGAR">LUGAR</h4>
+                            <p class="detail-value" data-it="Portals Hills Boutique Hotel" data-es="Portals Hills Boutique Hotel">Portals Hills Boutique Hotel</p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Fila con Fecha & Hora y Lugar -->
-                <div class="party-details">
-                    <div class="detail-item">
-                        <h4 class="detail-label" data-it="FECHA & HORA" data-es="FECHA & HORA">FECHA & HORA</h4>
-                        <p class="detail-value" data-it="Sábado 4 de Julio, 2026 | 18:00" data-es="Sábado 4 de Julio, 2026 | 18:00">Sábado 4 de Julio, 2026 | 18:00</p>
+                <!-- COLUMNA DERECHA -->
+                <div class="location-espana-right">
+                    <!-- Imagen decorativa -->
+                    <div class="location-espana-image">
+                        <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake">
                     </div>
 
-                    <div class="detail-item">
-                        <h4 class="detail-label" data-it="LUGAR" data-es="LUGAR">LUGAR</h4>
-                        <p class="detail-value" data-it="Portals Hills Boutique Hotel" data-es="Portals Hills Boutique Hotel">Portals Hills Boutique Hotel</p>
-                    </div>
-
-                    <a href="https://maps.app.goo.gl/3pxMvAdWob2FMUHS8" target="_blank" class="come-arrivare-button-espana">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                    <!-- Botón COME ARRIVARE -->
+                    <a href="https://maps.app.goo.gl/3pxMvAdWob2FMUHS8" target="_blank" class="come-arrivare-button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
@@ -1293,6 +1284,14 @@
             </div>
         </div>
     </section>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+        <a href="#save-the-date" data-it="LOCATION" data-es="LOCATION">LOCATION</a>
+        <a href="#grande-giorno" data-it="DRESS CODE" data-es="DRESS CODE">DRESS CODE</a>
+        <a href="#save-the-date" data-it="REGALI" data-es="REGALI">REGALI</a>
+        <a href="#rsvp" data-it="RSVP" data-es="RSVP">RSVP</a>
+    </nav>
 
     <script>
         // ===== LANGUAGE MANAGEMENT =====
