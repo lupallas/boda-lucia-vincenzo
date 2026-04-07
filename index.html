@@ -152,11 +152,12 @@
         }
 
         .envelope {
-            width: 380px;
-            height: 280px;
+            width: calc(70vh * 1.357);
+            height: 70vh;
             position: relative;
             filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
             animation: floatEnvelope 3s ease-in-out infinite;
+            max-width: 95vw;
         }
 
         @keyframes floatEnvelope {
@@ -261,14 +262,14 @@
 
         .bride-groom-names {
             font-family: 'Homemade Apple', cursive;
-            font-size: 64px;
+            font-size: 128px;
             color: #2D2B25;
             line-height: 1.2;
             margin-bottom: 20px;
         }
 
         .bride-groom-names .ampersand {
-            font-size: 48px;
+            font-size: 96px;
             color: #4460F3;
             display: inline-block;
             margin: 0 10px;
@@ -337,8 +338,8 @@
             }
 
             .envelope {
-                width: 280px;
-                height: 210px;
+                width: calc(60vh * 1.357);
+                height: 60vh;
             }
 
             .envelope-text {
@@ -359,7 +360,11 @@
             }
 
             .bride-groom-names {
-                font-size: 48px;
+                font-size: 72px;
+            }
+
+            .bride-groom-names .ampersand {
+                font-size: 54px;
             }
 
             .bottom-nav {
@@ -378,8 +383,8 @@
             }
 
             .envelope {
-                width: 240px;
-                height: 180px;
+                width: calc(50vh * 1.357);
+                height: 50vh;
             }
 
             .envelope-text {
@@ -391,6 +396,10 @@
             }
 
             .bride-groom-names {
+                font-size: 48px;
+            }
+
+            .bride-groom-names .ampersand {
                 font-size: 36px;
             }
 
