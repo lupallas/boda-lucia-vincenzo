@@ -195,29 +195,28 @@
             overflow: hidden;
         }
 
-        /* Decoraciones detrás del sobre (parcialmente tapadas) */
+        /* Decoraciones detrás del sobre (parcialmente tapadas por él) */
         .decoration {
             position: absolute;
-            width: clamp(140px, 18vw, 220px);
-            height: clamp(140px, 18vw, 220px);
+            width: clamp(130px, 16vw, 200px);
+            height: clamp(130px, 16vw, 200px);
             opacity: 0.95;
-            z-index: 2; /* detrás del sobre (z-index: 10) */
+            z-index: 2; /* detrás del sobre que es z-index: 10 */
             pointer-events: none;
         }
 
-        /* Torta: asoma desde detrás del borde izquierdo-inferior del sobre */
-        .decoration.cake {
+        /* Torta: a la izquierda del sobre, ligeramente arriba del centro */
+        .hero .decoration.cake {
             left: 50%;
             top: 50%;
-            /* desplazada hacia la esquina inferior izquierda del sobre */
-            transform: translate(-130%, 10%);
+            transform: translate(-260%, -60%);
         }
 
-        /* Anillos: asoman desde detrás del borde derecho-inferior del sobre */
-        .decoration.rings {
+        /* Anillos: a la derecha del sobre, a media altura */
+        .hero .decoration.rings {
             left: 50%;
             top: 50%;
-            transform: translate(30%, 5%);
+            transform: translate(160%, -30%);
         }
 
         .decoration img {
@@ -226,7 +225,7 @@
             object-fit: contain;
         }
 
-        /* En names-showcase las decoraciones van a los lados (no detrás) */
+        /* En names-showcase las decoraciones van a los lados, más separadas */
         .names-showcase .decoration {
             width: clamp(80px, 10vw, 110px);
             height: clamp(80px, 10vw, 110px);
@@ -269,61 +268,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-        }
-
-        .envelope-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 85%;
-            max-width: 340px;
-            z-index: 20;
-        }
-
-        .save-the-date-label {
-            font-family: var(--font-sans);
-            font-size: 12px;
-            letter-spacing: 3.5px;
-            text-transform: uppercase;
-            color: var(--color-ink-soft);
-            margin-bottom: 18px;
-            font-weight: 600;
-        }
-
-        .envelope-names {
-            font-family: var(--font-hand);
-            font-size: clamp(34px, 5.5vw, 48px);
-            color: var(--color-ink);
-            margin-bottom: 16px;
-            line-height: 1.25;
-        }
-
-        .envelope-names > div {
-            display: block;
-        }
-
-        .envelope-dates {
-            font-family: var(--font-sans);
-            font-size: 12px;
-            color: var(--color-ink-soft);
-            letter-spacing: 1.5px;
-            margin-bottom: 14px;
-        }
-
-        .envelope-dates .sep {
-            margin: 0 10px;
-            color: var(--color-line);
-        }
-
-        .envelope-subtitle {
-            font-family: var(--font-sans);
-            font-size: 12px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            font-weight: 600;
         }
 
         /* ==========================================
@@ -1470,13 +1414,13 @@
                 right: 3%;
             }
 
-            /* En el hero, las decoraciones detrás del sobre se acercan más */
+            /* En el hero, las decoraciones se acercan más al sobre en tablet */
             .hero .decoration.cake {
-                transform: translate(-110%, 15%);
+                transform: translate(-200%, -50%);
             }
 
             .hero .decoration.rings {
-                transform: translate(10%, 10%);
+                transform: translate(100%, -20%);
             }
 
             .events-container {
@@ -1542,36 +1486,18 @@
                 display: none;
             }
 
-            /* En el hero mantenerlas pero más pequeñas y más cerca del sobre */
+            /* En el hero mantenerlas pero más pequeñas y bien posicionadas */
             .hero .decoration {
-                width: 100px;
-                height: 100px;
+                width: 90px;
+                height: 90px;
             }
 
             .hero .decoration.cake {
-                transform: translate(-95%, 20%);
+                transform: translate(-170%, -40%);
             }
 
             .hero .decoration.rings {
-                transform: translate(-5%, 15%);
-            }
-
-            .envelope-text {
-                max-width: 260px;
-            }
-
-            .envelope-names {
-                font-size: 32px;
-            }
-
-            .save-the-date-label,
-            .envelope-subtitle {
-                font-size: 10px;
-                letter-spacing: 2.5px;
-            }
-
-            .envelope-dates {
-                font-size: 11px;
+                transform: translate(70%, -15%);
             }
 
             .showcase-kicker,
@@ -1722,19 +1648,6 @@
         <div class="envelope-wrapper">
             <div class="envelope">
                 <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png" alt="Vincenzo & Lucia Wedding Invitation">
-                <div class="envelope-text">
-                    <div class="save-the-date-label" data-it="SAVE THE DATE" data-es="SAVE THE DATE">SAVE THE DATE</div>
-                    <div class="envelope-names">
-                        <div>Vincenzo</div>
-                        <div>&amp; Lucia</div>
-                    </div>
-                    <div class="envelope-dates">
-                        <span>21.06.26</span>
-                        <span class="sep">|</span>
-                        <span>04.07.26</span>
-                    </div>
-                    <div class="envelope-subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!">CI SPOSIAMO!</div>
-                </div>
             </div>
         </div>
     </section>
