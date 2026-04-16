@@ -83,6 +83,32 @@
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
             min-height: 100%;
+            position: relative;
+        }
+
+        /* Textura de papel global y muy sutil */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.18  0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0.28 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+            background-size: 240px 240px;
+            opacity: 0.5;
+            mix-blend-mode: multiply;
+        }
+
+        /* Viñeteado global cálido muy sutil */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 20% 10%, rgba(224, 215, 201, 0.18) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 90%, rgba(214, 203, 188, 0.15) 0%, transparent 45%);
         }
 
         img {
@@ -103,6 +129,7 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
+            z-index: 1;
             padding: 80px 40px calc(var(--nav-height) + 40px);
         }
 
@@ -160,39 +187,6 @@
             color: var(--color-line);
             font-size: 10px;
         }
-
-        /* ==========================================
-           FONDO "AMORE" FLUIDO - centrado vertical y desfasado
-           ========================================== */
-        .amore-bg {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            user-select: none;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .amore-bg .amore-row {
-            font-family: var(--font-hand);
-            font-size: clamp(32px, 5vw, 52px);
-            color: rgba(209, 201, 193, 0.55);
-            white-space: nowrap;
-            line-height: 2.2;
-            letter-spacing: 0.5px;
-        }
-
-        /* Desfase alternado fila por fila - usando translateX con porcentajes diferentes */
-        .amore-bg .amore-row:nth-child(1) { transform: translateX(-8%); }
-        .amore-bg .amore-row:nth-child(2) { transform: translateX(-22%); }
-        .amore-bg .amore-row:nth-child(3) { transform: translateX(4%); }
-        .amore-bg .amore-row:nth-child(4) { transform: translateX(-18%); }
-        .amore-bg .amore-row:nth-child(5) { transform: translateX(-5%); }
-        .amore-bg .amore-row:nth-child(6) { transform: translateX(-28%); }
-        .amore-bg .amore-row:nth-child(7) { transform: translateX(2%); }
 
         /* ==========================================
            HERO — SOBRE
@@ -1533,18 +1527,6 @@
             .bottom-nav a.nav-rsvp {
                 padding: 6px 12px;
             }
-
-            .amore-bg .amore-row {
-                font-size: 36px;
-            }
-
-            .amore-bg .amore-row:nth-child(1) { transform: translateX(-15%); }
-            .amore-bg .amore-row:nth-child(2) { transform: translateX(-35%); }
-            .amore-bg .amore-row:nth-child(3) { transform: translateX(-5%); }
-            .amore-bg .amore-row:nth-child(4) { transform: translateX(-28%); }
-            .amore-bg .amore-row:nth-child(5) { transform: translateX(-12%); }
-            .amore-bg .amore-row:nth-child(6) { transform: translateX(-40%); }
-            .amore-bg .amore-row:nth-child(7) { transform: translateX(-8%); }
         }
 
         @media (max-width: 480px) {
@@ -1682,10 +1664,6 @@
             .bottom-nav a.nav-rsvp {
                 padding: 6px 10px;
             }
-
-            .amore-bg .amore-row {
-                font-size: 28px;
-            }
         }
 
         /* Reduce motion */
@@ -1716,16 +1694,6 @@
 
     <!-- ============================ HERO — SOBRE ============================ -->
     <section class="snap hero" id="top">
-        <div class="amore-bg" aria-hidden="true">
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-        </div>
-
         <div class="decoration cake" aria-hidden="true">
             <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="">
         </div>
@@ -1762,16 +1730,6 @@
 
     <!-- ============================ NOMBRES GRANDES ============================ -->
     <section class="snap names-showcase">
-        <div class="amore-bg" aria-hidden="true">
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
-            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
-        </div>
-
         <div class="decoration cake" aria-hidden="true">
             <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="">
         </div>
@@ -1860,7 +1818,7 @@
                         <p class="detail-value" data-it="Sala degli Specchi, Comune di Cesena" data-es="Sala degli Specchi, Comune di Cesena">Sala degli Specchi, Comune di Cesena</p>
                     </div>
 
-                    <a href="https://maps.app.goo.gl/HZz5tJQE8K9Z1QF77" target="_blank" rel="noopener" class="btn-arrivare">
+                    <a href="https://share.google/2dDdSphosntgqX9tW" target="_blank" rel="noopener" class="btn-arrivare">
                         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
@@ -2162,16 +2120,6 @@
 
     <!-- ============================ LOS ESPERAMOS ============================ -->
     <section class="snap esperamos-section" id="los-esperamos">
-        <div class="amore-bg" aria-hidden="true">
-            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
-            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
-            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
-            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
-            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
-            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
-            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
-        </div>
-
         <div class="esperamos-container">
             <div class="esperamos-content">
                 <div class="esperamos-kicker" data-it="VI ASPETTIAMO!" data-es="¡OS ESPERAMOS!">VI ASPETTIAMO!</div>
