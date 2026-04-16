@@ -3,94 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vincenzo & Lucia - Ci Sposiamo!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Homemade+Apple&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Vincenzo & Lucia · Ci Sposiamo!</title>
+    <meta name="description" content="Invitación de boda de Vincenzo y Lucia. 21.06.2026 Cesena · 04.07.2026 Mallorca">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Homemade+Apple&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ==========================================
+           DESIGN TOKENS
+           ========================================== */
+        :root {
+            --color-bg: #F9F7F5;
+            --color-bg-alt: #F3EFEB;
+            --color-ink: #2D2B25;
+            --color-ink-soft: #525252;
+            --color-ink-faint: #8A857E;
+            --color-line: #D0C8C0;
+            --color-line-soft: #E5DFD8;
+            --color-accent: #4460F3;
+            --color-accent-soft: #5170FF;
+            --color-accent-faint: rgba(68, 96, 243, 0.08);
+            --color-ghost: #E1DDDA;
+
+            --font-hand: 'Homemade Apple', cursive;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Work Sans', sans-serif;
+
+            --nav-height: 56px;
+            --max-content: 1200px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Work Sans', sans-serif;
-            background-color: #F9F7F5;
-            color: #2D2B25;
-            line-height: 1.6;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* ===== LANGUAGE TOGGLE ===== */
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-ink);
+            line-height: 1.6;
+            padding-bottom: var(--nav-height);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ==========================================
+           LANGUAGE TOGGLE
+           ========================================== */
         .language-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 1000;
             display: flex;
-            gap: 12px;
+            gap: 4px;
             align-items: center;
-            border: 1px solid #D0C8C0;
-            border-radius: 4px;
-            padding: 8px 12px;
-            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--color-line);
+            border-radius: 2px;
+            padding: 6px 10px;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .language-toggle svg {
+            width: 14px;
+            height: 14px;
+            opacity: 0.5;
+            margin-right: 4px;
         }
 
         .language-toggle button {
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
-            color: #525252;
+            color: var(--color-ink-soft);
             padding: 4px 8px;
-            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            transition: color 0.2s ease;
+            font-family: var(--font-sans);
         }
 
         .language-toggle button.active {
-            color: #4460F3;
+            color: var(--color-accent);
         }
 
-        .language-toggle svg {
-            width: 16px;
-            height: 16px;
-            opacity: 0.6;
+        .language-toggle .sep {
+            color: var(--color-line);
+            font-size: 10px;
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ==========================================
+           HERO — SOBRE (single unified hero with scroll transition)
+           ========================================== */
         .hero {
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #F9F7F5;
+            background-color: var(--color-bg);
             position: relative;
             overflow: hidden;
+            padding: 40px 20px;
         }
 
-        .hero-content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Fondo con texto repetido */
         .hero-background-text {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Homemade Apple', cursive;
-            font-size: 48px;
-            color: rgba(224, 224, 224, 0.15);
+            inset: 0;
+            font-family: var(--font-hand);
+            font-size: 44px;
+            color: rgba(209, 201, 193, 0.2);
             overflow: hidden;
             pointer-events: none;
-            line-height: 1.8;
+            line-height: 1.9;
+            user-select: none;
         }
 
         .hero-background-text span {
@@ -99,743 +140,1263 @@
             white-space: nowrap;
         }
 
-        /* Contenedor central del sobre */
-        .envelope-container {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .envelope-container.hidden {
-            opacity: 0;
-            transform: translateY(-100px) scale(0.8);
+        /* Decoraciones laterales */
+        .decoration {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            opacity: 0.85;
+            z-index: 2;
             pointer-events: none;
         }
 
-        /* Elementos decorativos laterales */
-        .decoration {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            opacity: 0.8;
-        }
-
-        .cake {
-            left: 40px;
+        .decoration.cake {
+            left: 4%;
             top: 50%;
             transform: translateY(-50%);
         }
 
-        .rings {
-            right: 40px;
+        .decoration.rings {
+            right: 4%;
             top: 50%;
             transform: translateY(-50%);
         }
 
-        .cake img,
-        .rings img {
+        .decoration img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        /* Sobre y contenido */
+        /* Contenedor del sobre */
         .envelope-wrapper {
-            perspective: 1000px;
             position: relative;
-        }
-
-        .envelope {
-            width: calc(70vh * 1.357);
-            height: 70vh;
-            position: relative;
-            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
-            animation: floatEnvelope 3s ease-in-out infinite;
-            max-width: 95vw;
+            z-index: 10;
+            filter: drop-shadow(0 20px 50px rgba(45, 43, 37, 0.12));
+            animation: floatEnvelope 4s ease-in-out infinite;
         }
 
         @keyframes floatEnvelope {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
         }
 
-        .envelope img {
+        .envelope {
+            width: min(650px, 88vw);
+            aspect-ratio: 1.357 / 1;
+            position: relative;
+        }
+
+        .envelope > img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        /* Texto sobre el sobre */
         .envelope-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            width: 320px;
+            width: 85%;
+            max-width: 340px;
             z-index: 20;
         }
 
-        .save-the-date {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 13px;
-            letter-spacing: 3px;
+        .save-the-date-label {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            letter-spacing: 3.5px;
             text-transform: uppercase;
-            color: #525252;
-            margin-bottom: 20px;
+            color: var(--color-ink-soft);
+            margin-bottom: 18px;
             font-weight: 600;
         }
 
-        .names {
-            font-family: 'Homemade Apple', cursive;
-            font-size: 52px;
-            color: #2D2B25;
-            margin-bottom: 18px;
+        .envelope-names {
+            font-family: var(--font-hand);
+            font-size: clamp(38px, 6.5vw, 54px);
+            color: var(--color-ink);
+            margin-bottom: 16px;
             line-height: 1.2;
         }
 
-        .dates {
-            font-family: 'Work Sans', sans-serif;
+        .envelope-names > div {
+            display: block;
+        }
+
+        .envelope-dates {
+            font-family: var(--font-sans);
             font-size: 12px;
-            color: #525252;
-            letter-spacing: 1px;
+            color: var(--color-ink-soft);
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
         }
 
-        .dates span {
-            display: inline-block;
+        .envelope-dates .sep {
+            margin: 0 10px;
+            color: var(--color-line);
         }
 
-        .dates span:first-child {
-            margin-right: 8px;
-        }
-
-        .dates span:last-child {
-            margin-left: 8px;
-        }
-
-        /* Subtítulo dentro del sobre */
         .envelope-subtitle {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 13px;
-            letter-spacing: 2px;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: #525252;
-            margin-top: 12px;
+            color: var(--color-accent);
             font-weight: 600;
         }
 
-        /* Vista secundaria - contenedor con nombres gigantes */
-        .secondary-view {
+        /* Hint de scroll */
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-ink-faint);
+            font-family: var(--font-sans);
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            animation: scrollBounce 2s ease-in-out infinite;
+            z-index: 5;
+        }
+
+        .scroll-hint svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.7; }
+            50% { transform: translate(-50%, 6px); opacity: 1; }
+        }
+
+        /* ==========================================
+           SECTION: NOMBRES GRANDES (antes era hero-secondary)
+           ========================================== */
+        .names-showcase {
+            width: 100%;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+            padding: 80px 20px;
+        }
+
+        .names-showcase .hero-background-text {
+            font-size: 40px;
+        }
+
+        .names-showcase-content {
             position: relative;
             z-index: 10;
             text-align: center;
             width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
 
-        .secondary-title {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 13px;
-            letter-spacing: 3px;
+        .showcase-kicker {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            letter-spacing: 3.5px;
             text-transform: uppercase;
-            color: #525252;
+            color: var(--color-ink-soft);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .showcase-names {
+            font-family: var(--font-hand);
+            font-size: clamp(64px, 13vw, 128px);
+            color: var(--color-ink);
+            line-height: 1.05;
             margin-bottom: 30px;
         }
 
-        .bride-groom-names {
-            font-family: 'Homemade Apple', cursive;
-            font-size: 128px;
-            color: #2D2B25;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .bride-groom-names .ampersand {
-            font-size: 96px;
-            color: #4460F3;
+        .showcase-names .ampersand {
+            color: var(--color-accent);
             display: inline-block;
             margin: 0 20px;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 500;
+            font-size: 0.75em;
+            vertical-align: middle;
         }
 
-        /* ===== SAVE THE DATE SECTION ===== */
-        .save-the-date-section {
+        .showcase-subtitle {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* ==========================================
+           SAVE THE DATE SECTION
+           ========================================== */
+        .section {
             width: 100%;
-            background-color: #F9F7F5;
-            padding: 120px 10vw;
+            padding: 120px 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
         }
 
-        .location-container {
-            max-width: 900px;
+        .section-inner {
+            max-width: var(--max-content);
             width: 100%;
+        }
+
+        .save-the-date-section {
+            min-height: 90vh;
+        }
+
+        .std-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        .location-title {
-            font-family: 'Homemade Apple', cursive;
-            font-size: 48px;
-            color: #4460F3;
-            margin-bottom: 40px;
-            line-height: 1.2;
+        .std-title {
+            font-family: var(--font-hand);
+            font-size: clamp(42px, 5.5vw, 60px);
+            color: var(--color-accent);
+            margin-bottom: 36px;
+            line-height: 1.15;
             font-weight: 400;
         }
 
-        .location-description {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            color: #525252;
-            margin-bottom: 60px;
+        .std-description {
+            font-family: var(--font-serif);
+            font-size: clamp(18px, 2vw, 22px);
+            color: var(--color-ink-soft);
+            margin-bottom: 70px;
             line-height: 1.8;
-            max-width: 800px;
+            max-width: 720px;
+            font-weight: 400;
         }
 
         .events-container {
             display: flex;
             justify-content: center;
             align-items: stretch;
-            gap: 60px;
+            gap: 70px;
             width: 100%;
+            flex-wrap: wrap;
         }
 
         .event-card {
-            flex: 0 1 280px;
+            flex: 0 1 260px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 18px;
         }
 
         .event-date {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            color: #2D2B25;
+            font-family: var(--font-serif);
+            font-size: 52px;
+            color: var(--color-ink);
             font-weight: 400;
             letter-spacing: 1px;
+            line-height: 1;
         }
 
         .event-date.blue {
-            color: #4460F3;
+            color: var(--color-accent);
         }
 
         .event-label {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 12px;
-            color: #525252;
-            letter-spacing: 2px;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            color: var(--color-ink-soft);
+            letter-spacing: 2.5px;
             text-transform: uppercase;
             font-weight: 600;
         }
 
         .event-location {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: var(--font-serif);
             font-size: 20px;
-            color: #2D2B25;
+            color: var(--color-ink);
             font-weight: 400;
+            font-style: italic;
         }
 
         .events-divider {
             width: 1px;
-            height: 120px;
-            background-color: #D0C8C0;
+            height: 140px;
+            background: linear-gradient(to bottom, transparent, var(--color-line), transparent);
             align-self: center;
         }
 
-        /* ===== EL GRANDE GIORNO SECTION ===== */
-        .grande-giorno {
-            width: 100%;
-            background-color: #F9F7F5;
-            padding: 80px 10vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+        /* ==========================================
+           IL GRANDE GIORNO
+           ========================================== */
+        .grande-giorno-section {
+            padding: 80px 40px;
         }
 
         .grande-giorno-container {
-            max-width: 1200px;
-            width: 100%;
             display: flex;
             align-items: center;
-            gap: 80px;
+            gap: 90px;
+            max-width: var(--max-content);
+            margin: 0 auto;
         }
 
         .grande-giorno-image {
-            flex: 0 0 auto;
-            width: 400px;
+            flex: 0 0 380px;
+            position: relative;
         }
 
         .grande-giorno-image img {
             width: 100%;
             height: auto;
-            display: block;
             filter: grayscale(100%);
-            transform: rotate(-8deg);
-            box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.2);
+            transform: rotate(-6deg);
+            box-shadow: 12px 14px 36px rgba(45, 43, 37, 0.18);
             border-radius: 2px;
+            border: 8px solid #fff;
         }
 
         .grande-giorno-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 28px;
         }
 
         .grande-giorno-title {
-            font-family: 'Homemade Apple', cursive;
-            font-size: 40px;
-            color: #4460F3;
-            line-height: 1.2;
+            font-family: var(--font-hand);
+            font-size: clamp(34px, 4.5vw, 48px);
+            color: var(--color-accent);
+            line-height: 1.15;
             font-weight: 400;
         }
 
         .grande-giorno-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 20px;
-            color: #525252;
+            font-family: var(--font-serif);
+            font-size: clamp(17px, 1.6vw, 20px);
+            color: var(--color-ink-soft);
             line-height: 1.9;
-            max-width: 600px;
+            max-width: 620px;
         }
 
-        /* ===== BOTTOM NAVIGATION ===== */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #4460F3;
-            padding: 16px 0;
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            gap: 50px;
+        /* ==========================================
+           LOCATION ITALIA & ESPAÑA
+           ========================================== */
+        .location-section {
+            padding: 110px 40px;
         }
 
-        .bottom-nav a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        .bottom-nav a:hover {
-            color: #FFFFFF;
-        }
-
-        /* Estilo RSVP resaltado */
-        .bottom-nav a[href="#rsvp"] {
-            background-color: white;
-            color: #4460F3;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .bottom-nav a[href="#rsvp"]:hover {
-            background-color: #f0f0f0;
-            transform: translateY(-1px);
-        }
-
-        /* ===== LOCATION ITALIA SECTION ===== */
-        .location-italia {
-            width: 100%;
-            background-color: #F9F7F5;
-            padding: 120px 10vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: auto;
-        }
-
-        .location-italia-container {
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Grid de 2 columnas */
-        .location-italia-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            width: 100%;
-            align-items: stretch;
-        }
-
-        /* Columna izquierda */
-        .location-italia-left {
+        .location-wrapper {
+            max-width: var(--max-content);
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
+            gap: 60px;
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 40px;
         }
 
-        /* Columna derecha */
-        .location-italia-right {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: stretch;
-            justify-content: flex-start;
-        }
-
-        /* Título Italia */
-        .location-italia-title {
-            font-family: 'Homemade Apple', cursive;
-            font-size: 80px;
-            color: #2D2B25;
-            line-height: 1.1;
+        .location-title {
+            font-family: var(--font-hand);
+            font-size: clamp(54px, 8vw, 88px);
+            color: var(--color-ink);
+            line-height: 1.05;
             font-weight: 400;
-            margin: 0;
+            flex: 1;
         }
 
-        /* Imagen decorativa */
-        .location-italia-image {
-            width: 100%;
-            height: 300px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .location-decoration {
+            flex: 0 0 auto;
+            width: 130px;
+            height: 130px;
         }
 
-        .location-italia-image img {
+        .location-decoration img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
 
-        /* Ceremony Section */
-        .ceremony-section {
+        .location-content {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 40px;
+            max-width: 900px;
         }
 
-        .ceremony-title {
-            font-family: 'Work Sans', sans-serif;
+        .location-kicker {
+            font-family: var(--font-sans);
             font-size: 12px;
-            color: #2D2B25;
+            color: var(--color-ink);
             letter-spacing: 3px;
             text-transform: uppercase;
             font-weight: 600;
-            margin: 0;
         }
 
-        .ceremony-description {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            color: #525252;
+        .location-description {
+            font-family: var(--font-serif);
+            font-size: clamp(16px, 1.5vw, 19px);
+            color: var(--color-ink-soft);
             line-height: 1.9;
-            margin: 0;
+            margin-top: 12px;
         }
 
-        .party-description {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 18px;
-            color: #525252;
-            line-height: 1.9;
-            margin: 0;
-        }
-
-        /* Details Row - Ceremony & Party */
-        .ceremony-details,
-        .party-details {
+        .location-details {
             display: flex;
+            align-items: flex-end;
             gap: 80px;
             flex-wrap: wrap;
         }
 
-        /* Detail Item - Ceremony & Party */
         .detail-item {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            flex: 0 0 auto;
+            gap: 10px;
         }
 
-        /* Detail Label - Ceremony & Party */
         .detail-label {
-            font-family: 'Work Sans', sans-serif;
+            font-family: var(--font-sans);
             font-size: 11px;
-            color: #2D2B25;
+            color: var(--color-ink);
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
-            margin: 0;
         }
 
-        /* Detail Value - Ceremony & Party */
         .detail-value {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: var(--font-serif);
             font-size: 17px;
-            color: #2D2B25;
-            margin: 0;
+            color: var(--color-ink);
             font-weight: 400;
         }
 
-        /* Come Arrivare Button */
-        .come-arrivare-button {
-            background-color: #4460F3;
+        .btn-arrivare {
+            background-color: var(--color-accent);
             color: white;
-            padding: 16px 32px;
+            padding: 16px 28px;
             border: none;
-            border-radius: 0;
-            font-family: 'Work Sans', sans-serif;
-            font-size: 12px;
+            font-family: var(--font-sans);
+            font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
             transition: all 0.3s ease;
             white-space: nowrap;
-            width: 100%;
         }
 
-        .come-arrivare-button:hover {
+        .btn-arrivare:hover {
             background-color: #3350d4;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(68, 96, 243, 0.35);
+            box-shadow: 0 8px 20px rgba(68, 96, 243, 0.3);
         }
 
-        .come-arrivare-button svg {
-            width: 18px;
-            height: 18px;
+        .btn-arrivare svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Alternating backgrounds */
+        .section-alt {
+            background-color: var(--color-bg-alt);
+        }
+
+        /* ==========================================
+           PROGRAMA + DRESS CODE
+           ========================================== */
+        .programa-section {
+            padding: 110px 40px;
+        }
+
+        .programa-wrapper {
+            max-width: var(--max-content);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        .programa-col-title {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 4vw, 44px);
+            color: var(--color-ink);
+            margin-bottom: 36px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        /* Programa timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: baseline;
+            gap: 40px;
+            padding: 22px 0;
+            border-bottom: 1px dashed var(--color-line);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-time {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            color: var(--color-ink-soft);
+            font-weight: 400;
+            min-width: 60px;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-event {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            color: var(--color-ink);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        /* Dress code */
+        .dresscode-block {
+            margin-bottom: 40px;
+        }
+
+        .dresscode-label {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            color: var(--color-ink);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .dresscode-text {
+            font-family: var(--font-serif);
+            font-size: 17px;
+            color: var(--color-ink-soft);
+            line-height: 1.85;
+            margin-bottom: 26px;
+        }
+
+        .dresscode-palette {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            border: 1px solid var(--color-line-soft);
+        }
+
+        .palette-swatch {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
             flex-shrink: 0;
         }
 
-        /* ===== COUNTDOWN SECTION ===== */
-        .countdown {
-            width: 100%;
-            background-color: #F9F7F5;
-            padding: 120px 10vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: auto;
+        /* ==========================================
+           COUNTDOWN
+           ========================================== */
+        .countdown-section {
+            padding: 130px 40px;
+            text-align: center;
         }
 
-        .countdown-container {
-            max-width: 1200px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 80px;
-        }
-
-        /* Countdown Title */
-        .countdown-title {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 18px;
-            letter-spacing: 4px;
+        .countdown-kicker {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            letter-spacing: 3.5px;
             text-transform: uppercase;
-            color: #999999;
-            font-weight: 600;
-            margin: 0;
-            text-align: center;
+            color: var(--color-ink-soft);
+            font-weight: 500;
+            margin-bottom: 60px;
         }
 
-        /* Countdown Timer - Alineación horizontal */
-        .countdown-timer {
+        .countdown-display {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 60px;
+            align-items: flex-start;
+            gap: clamp(24px, 6vw, 90px);
             flex-wrap: wrap;
-            width: 100%;
         }
 
-        /* Countdown Item */
-        .countdown-item {
+        .countdown-unit {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
-            text-align: center;
-        }
-
-        /* Circle Container para días */
-        .countdown-circle {
+            gap: 10px;
             position: relative;
-            width: 220px;
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .circle-image {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            z-index: 1;
-        }
-
-        /* Countdown Value */
-        .countdown-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 120px;
-            color: #2D2B25;
-            line-height: 1;
+        .countdown-number {
+            font-family: var(--font-serif);
+            font-size: clamp(72px, 10vw, 128px);
             font-weight: 400;
+            color: var(--color-ink);
+            line-height: 1;
             position: relative;
             z-index: 2;
         }
 
-        /* Countdown Label */
         .countdown-label {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 13px;
-            letter-spacing: 2px;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            color: var(--color-ink-soft);
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: #999999;
+            font-weight: 500;
+        }
+
+        /* Círculo SVG dibujado a mano sobre los días */
+        .countdown-circle-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -54%);
+            width: 145%;
+            height: 110%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .countdown-circle-wrapper svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .countdown-circle-wrapper path {
+            fill: none;
+            stroke: var(--color-accent);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 900;
+            stroke-dashoffset: 900;
+            animation: drawCircle 2.5s ease-in-out forwards 0.5s;
+        }
+
+        @keyframes drawCircle {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* ==========================================
+           ALGUNOS DETALLES
+           ========================================== */
+        .detalles-section {
+            padding: 110px 40px;
+        }
+
+        .detalles-container {
+            max-width: var(--max-content);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.9fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .detalles-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detalles-image img {
+            max-width: 360px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(45, 43, 37, 0.08));
+        }
+
+        .detalles-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .detalles-title {
+            font-family: var(--font-hand);
+            font-size: clamp(34px, 4.2vw, 46px);
+            color: var(--color-ink);
+            line-height: 1.15;
+            font-weight: 400;
+        }
+
+        .detalles-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .detalles-list li {
+            font-family: var(--font-serif);
+            font-size: clamp(16px, 1.4vw, 18px);
+            color: var(--color-ink-soft);
+            line-height: 1.75;
+            padding-left: 26px;
+            position: relative;
+        }
+
+        .detalles-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        /* Bank details block */
+        .bank-block {
+            margin-top: 30px;
+            padding: 28px 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .bank-title {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            color: var(--color-ink);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        .bank-details {
+            font-family: var(--font-serif);
+            font-size: 16px;
+            color: var(--color-ink-soft);
+            line-height: 1.8;
+        }
+
+        .bank-details strong {
+            color: var(--color-ink);
+            font-weight: 500;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .bank-iban {
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            color: var(--color-ink);
+            letter-spacing: 1.5px;
+        }
+
+        /* ==========================================
+           RSVP FORM
+           ========================================== */
+        .rsvp-section {
+            padding: 120px 40px;
+            background-color: var(--color-bg-alt);
+        }
+
+        .rsvp-container {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .rsvp-kicker {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--color-ink-soft);
+            margin-bottom: 20px;
             font-weight: 600;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .language-toggle {
-                top: 15px;
-                right: 15px;
-                padding: 6px 10px;
+        .rsvp-title {
+            font-family: var(--font-hand);
+            font-size: clamp(44px, 6vw, 64px);
+            color: var(--color-accent);
+            line-height: 1.1;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .rsvp-description {
+            font-family: var(--font-serif);
+            font-size: clamp(17px, 1.6vw, 19px);
+            color: var(--color-ink-soft);
+            line-height: 1.8;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            color: var(--color-ink);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .form-label .required {
+            color: var(--color-accent);
+            margin-left: 2px;
+        }
+
+        .form-label .optional {
+            color: var(--color-ink-faint);
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: none;
+            font-size: 10px;
+            margin-left: 6px;
+            font-style: italic;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--color-line);
+            background-color: rgba(255, 255, 255, 0.8);
+            font-family: var(--font-serif);
+            font-size: 17px;
+            color: var(--color-ink);
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            background-color: #fff;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: var(--font-serif);
+        }
+
+        /* Radio options (asistencia) */
+        .form-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-radio-option {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border: 1px solid var(--color-line);
+            background-color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .form-radio-option:hover {
+            border-color: var(--color-accent-soft);
+        }
+
+        .form-radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .form-radio-custom {
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid var(--color-line);
+            border-radius: 50%;
+            flex-shrink: 0;
+            position: relative;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-radio-option input[type="radio"]:checked + .form-radio-custom {
+            border-color: var(--color-accent);
+        }
+
+        .form-radio-option input[type="radio"]:checked + .form-radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .form-radio-option.selected {
+            border-color: var(--color-accent);
+            background-color: var(--color-accent-faint);
+        }
+
+        .form-radio-label {
+            font-family: var(--font-serif);
+            font-size: 17px;
+            color: var(--color-ink);
+            flex: 1;
+        }
+
+        /* Conditional group */
+        .conditional-group {
+            display: none;
+            flex-direction: column;
+            gap: 24px;
+            padding: 24px;
+            background-color: rgba(68, 96, 243, 0.04);
+            border-left: 3px solid var(--color-accent);
+            animation: fadeSlide 0.4s ease;
+        }
+
+        .conditional-group.active {
+            display: flex;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .conditional-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .btn-submit {
+            background-color: var(--color-accent);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            align-self: center;
+            min-width: 220px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background-color: #3350d4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(68, 96, 243, 0.3);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-status {
+            margin-top: 24px;
+            padding: 18px;
+            border-radius: 2px;
+            font-family: var(--font-serif);
+            font-size: 16px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            background-color: rgba(68, 96, 243, 0.08);
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+        }
+
+        .form-status.error {
+            display: block;
+            background-color: rgba(200, 60, 60, 0.08);
+            color: #c03c3c;
+            border: 1px solid #c03c3c;
+        }
+
+        /* ==========================================
+           LOS ESPERAMOS (sección final)
+           ========================================== */
+        .esperamos-section {
+            width: 100%;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            background-color: var(--color-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .esperamos-bg-text {
+            position: absolute;
+            inset: 0;
+            font-family: var(--font-hand);
+            font-size: 48px;
+            color: rgba(209, 201, 193, 0.22);
+            overflow: hidden;
+            pointer-events: none;
+            line-height: 1.85;
+            user-select: none;
+        }
+
+        .esperamos-bg-text span {
+            display: block;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .esperamos-container {
+            position: relative;
+            z-index: 10;
+            max-width: 1100px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .esperamos-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .esperamos-kicker {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--color-ink-soft);
+            font-weight: 600;
+        }
+
+        .esperamos-names {
+            font-family: var(--font-hand);
+            font-size: clamp(64px, 9vw, 120px);
+            color: var(--color-ink);
+            line-height: 1.05;
+            font-weight: 400;
+        }
+
+        .esperamos-names .amp {
+            color: var(--color-accent);
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.75em;
+            margin: 0 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .esperamos-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .esperamos-image img {
+            max-width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transform: rotate(6deg);
+            box-shadow: 14px 16px 40px rgba(45, 43, 37, 0.2);
+            border-radius: 2px;
+            border: 8px solid #fff;
+        }
+
+        /* ==========================================
+           BOTTOM NAVIGATION
+           ========================================== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-accent);
+            padding: 14px 20px;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(20px, 5vw, 50px);
+            height: var(--nav-height);
+        }
+
+        .bottom-nav a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            font-family: var(--font-sans);
+            white-space: nowrap;
+        }
+
+        .bottom-nav a:hover {
+            color: #fff;
+        }
+
+        .bottom-nav a.nav-rsvp {
+            background-color: white;
+            color: var(--color-accent);
+            padding: 8px 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav a.nav-rsvp:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-1px);
+            color: var(--color-accent);
+        }
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+        @media (max-width: 900px) {
+            .programa-wrapper {
+                grid-template-columns: 1fr;
+                gap: 60px;
             }
 
-            .language-toggle button {
-                font-size: 12px;
+            .detalles-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                text-align: center;
             }
 
-            .save-the-date-section {
-                padding: 80px 20px;
-                min-height: auto;
+            .detalles-image img {
+                max-width: 280px;
             }
 
-            .location-title {
-                font-size: 40px;
-                margin-bottom: 30px;
+            .detalles-list li {
+                text-align: left;
             }
 
-            .location-description {
-                font-size: 18px;
-                margin-bottom: 40px;
-            }
-
-            .events-container {
-                gap: 30px;
-            }
-
-            .event-card {
-                flex: 0 1 200px;
-            }
-
-            .event-date {
-                font-size: 36px;
-            }
-
-            .event-location {
-                font-size: 16px;
-            }
-
-            .events-divider {
-                height: 100px;
-            }
-
-            .grande-giorno {
-                padding: 60px 20px;
-                min-height: auto;
+            .esperamos-container {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                text-align: center;
             }
 
             .grande-giorno-container {
                 flex-direction: column;
-                gap: 40px;
+                gap: 50px;
             }
 
             .grande-giorno-image {
-                width: 300px;
+                flex: 0 0 auto;
+                width: 320px;
             }
 
-            .grande-giorno-title {
-                font-size: 32px;
+            .grande-giorno-content {
+                text-align: center;
             }
 
             .grande-giorno-text {
-                font-size: 18px;
+                margin: 0 auto;
             }
 
-            .location-italia {
-                padding: 60px 20px;
+            .location-header {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
             }
 
-            .location-italia-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            .location-decoration {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section,
+            .location-section,
+            .programa-section,
+            .detalles-section,
+            .countdown-section,
+            .rsvp-section,
+            .grande-giorno-section {
+                padding: 70px 24px;
             }
 
-            .location-italia-title {
-                font-size: 50px;
+            .esperamos-section {
+                padding: 70px 24px;
             }
 
-            .location-italia-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            .ceremony-details {
-                gap: 40px;
-            }
-
-            .location-espana {
-                padding: 60px 20px;
-            }
-
-            .location-italia-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .location-italia-title {
-                font-size: 50px;
-            }
-
-            .location-italia-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            .ceremony-details {
-                gap: 40px;
+            .language-toggle {
+                top: 12px;
+                right: 12px;
+                padding: 5px 8px;
             }
 
             .decoration {
@@ -843,81 +1404,58 @@
                 height: 60px;
             }
 
-            .cake {
-                left: 20px;
+            .events-container {
+                gap: 40px;
             }
 
-            .rings {
-                right: 20px;
+            .events-divider {
+                display: none;
             }
 
-            .envelope {
-                width: calc(60vh * 1.357);
-                height: 60vh;
+            .event-card {
+                flex: 0 1 220px;
             }
 
-            .envelope-text {
-                width: 240px;
+            .event-date {
+                font-size: 42px;
             }
 
-            .save-the-date {
-                font-size: 11px;
-                letter-spacing: 2px;
+            .location-details {
+                gap: 40px;
             }
 
-            .names {
-                font-size: 40px;
+            .conditional-row {
+                grid-template-columns: 1fr;
             }
 
-            .subtitle {
-                font-size: 11px;
+            .timeline-item {
+                gap: 24px;
             }
 
-            .bride-groom-names {
-                font-size: 80px;
+            .timeline-event {
+                font-size: 18px;
             }
 
-            .bride-groom-names .ampersand {
-                font-size: 60px;
+            .countdown-display {
+                gap: 20px;
+            }
+
+            .bank-block {
+                padding: 22px 20px;
             }
 
             .bottom-nav {
-                padding: 12px 0;
-                gap: 30px;
+                padding: 12px 14px;
+                gap: 16px;
             }
 
             .bottom-nav a {
                 font-size: 10px;
+                letter-spacing: 1.5px;
             }
 
-            .countdown {
-                padding: 80px 20px;
-            }
-
-            .countdown-container {
-                gap: 60px;
-            }
-
-            .countdown-title {
-                font-size: 14px;
-                letter-spacing: 3px;
-            }
-
-            .countdown-timer {
-                gap: 40px;
-            }
-
-            .countdown-circle {
-                width: 160px;
-                height: 160px;
-            }
-
-            .countdown-value {
-                font-size: 80px;
-            }
-
-            .countdown-label {
-                font-size: 11px;
+            .bottom-nav a.nav-rsvp {
+                padding: 6px 12px;
             }
         }
 
@@ -926,353 +1464,212 @@
                 display: none;
             }
 
-            .envelope {
-                width: calc(50vh * 1.357);
-                height: 50vh;
-            }
-
-            .envelope-text {
-                width: 200px;
-            }
-
-            .names {
-                font-size: 32px;
-            }
-
-            .bride-groom-names {
-                font-size: 48px;
-            }
-
-            .bride-groom-names .ampersand {
-                font-size: 36px;
-            }
-
-            .location {
-                padding: 40px 15px;
-            }
-
-            .location-title {
-                font-size: 32px;
-                margin-bottom: 20px;
-            }
-
-            .location-description {
-                font-size: 16px;
-                margin-bottom: 30px;
-            }
-
             .events-container {
                 flex-direction: column;
-                gap: 40px;
+                gap: 36px;
             }
 
-            .event-card {
-                flex: 0 1 auto;
+            .std-description {
+                margin-bottom: 50px;
             }
 
-            .event-date {
-                font-size: 32px;
-            }
-
-            .event-location {
-                font-size: 14px;
-            }
-
-            .events-divider {
-                width: 80px;
-                height: 1px;
-            }
-
-            .grande-giorno {
-                padding: 40px 15px;
-            }
-
-            .grande-giorno-container {
-                gap: 30px;
-            }
-
-            .grande-giorno-image {
-                width: 250px;
-            }
-
-            .grande-giorno-title {
-                font-size: 32px;
-            }
-
-            .grande-giorno-text {
-                font-size: 16px;
-                line-height: 1.7;
-            }
-
-            .location-italia {
-                padding: 40px 15px;
-            }
-
-            .location-italia-title {
-                font-size: 32px;
-            }
-
-            .location-italia-decoration {
-                width: 60px;
-                height: 60px;
-                top: 20px;
-                right: 15px;
-            }
-
-            .location-italia-content {
-                margin-top: 40px;
-                gap: 30px;
-            }
-
-            .ceremony-description {
-                font-size: 16px;
-                line-height: 1.7;
-            }
-
-            .ceremony-details {
-                flex-direction: column;
-                gap: 30px;
-                align-items: flex-start;
-            }
-
-            .detail-value {
-                font-size: 14px;
-            }
-
-            .come-arrivare-button {
-                width: 100%;
-                padding: 12px 20px;
-                font-size: 11px;
-            }
-
-            .location-italia-title {
-                font-size: 32px;
-            }
-
-            .location-italia-image {
-                width: 60px;
-                height: 60px;
-            }
-
-            .ceremony-description {
-                font-size: 16px;
-                line-height: 1.7;
-            }
-
-            .ceremony-details {
-                flex-direction: column;
-                gap: 30px;
-                align-items: flex-start;
-            }
-
-            .countdown {
-                padding: 60px 15px;
-            }
-
-            .countdown-container {
-                gap: 50px;
-            }
-
-            .countdown-title {
-                font-size: 12px;
-                letter-spacing: 2px;
-            }
-
-            .countdown-timer {
-                gap: 25px;
-            }
-
-            .countdown-circle {
-                width: 120px;
-                height: 120px;
-            }
-
-            .countdown-value {
-                font-size: 60px;
+            .countdown-number {
+                font-size: 64px;
             }
 
             .countdown-label {
                 font-size: 10px;
             }
+
+            .esperamos-names {
+                font-size: 56px;
+            }
+
+            .dresscode-palette {
+                padding: 16px;
+                gap: 10px;
+            }
+
+            .palette-swatch {
+                width: 38px;
+                height: 38px;
+            }
+
+            .bottom-nav {
+                gap: 10px;
+            }
+
+            .bottom-nav a {
+                font-size: 9px;
+                letter-spacing: 1px;
+            }
+        }
+
+        /* Reduce motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- LANGUAGE TOGGLE -->
-    <div class="language-toggle">
+
+    <!-- ============================ LANGUAGE TOGGLE ============================ -->
+    <div class="language-toggle" role="region" aria-label="Selector de idioma">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
         </svg>
-        <button class="lang-btn active" data-lang="it">IT</button>
-        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn active" data-lang="it" aria-label="Italiano">IT</button>
+        <span class="sep">·</span>
+        <button class="lang-btn" data-lang="es" aria-label="Español">ES</button>
     </div>
 
-    <!-- HERO - SOBRE -->
-    <section class="hero hero-envelope">
-        <div class="hero-content">
-            <!-- Fondo de texto decorativo -->
-            <div class="hero-background-text">
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-            </div>
+    <!-- ============================ HERO — SOBRE ============================ -->
+    <section class="hero" id="top">
+        <div class="hero-background-text" aria-hidden="true">
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+        </div>
 
-            <!-- Decoraciones laterales -->
-            <div class="decoration cake">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake decoration">
-            </div>
-            <div class="decoration rings">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="Rings decoration">
-            </div>
+        <div class="decoration cake" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="">
+        </div>
+        <div class="decoration rings" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="">
+        </div>
 
-            <!-- Contenedor del sobre (animado) -->
-            <div class="envelope-container" id="envelopeContainer">
-                <!-- Sobre con texto superpuesto -->
-                <div class="envelope-wrapper">
-                    <div class="envelope">
-                        <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png" alt="Invitation Envelope">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png" alt="Invitación de boda">
+                <div class="envelope-text">
+                    <div class="save-the-date-label" data-it="SAVE THE DATE" data-es="SAVE THE DATE">SAVE THE DATE</div>
+                    <div class="envelope-names">
+                        <div>Vincenzo</div>
+                        <div>&amp; Lucia</div>
                     </div>
-                    <div class="envelope-text">
-                        <div class="save-the-date" data-it="SAVE THE DATE" data-es="SAVE THE DATE"></div>
-                        <div class="names">
-                            <div data-it="Vincenzo" data-es="Vincenzo">Vincenzo</div>
-                            <div data-it="& Lucia" data-es="& Lucia">& Lucia</div>
-                        </div>
-                        <div class="dates">
-                            <span data-it="21.06.25" data-es="21.06.25">21.06.25</span>
-                            <span>|</span>
-                            <span data-it="04.07.25" data-es="04.07.25">04.07.25</span>
-                        </div>
-                        <div class="envelope-subtitle" data-it="¡NOS CASAMOS!" data-es="¡NOS CASAMOS!"></div>
+                    <div class="envelope-dates">
+                        <span>21.06.26</span>
+                        <span class="sep">|</span>
+                        <span>04.07.26</span>
+                    </div>
+                    <div class="envelope-subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!">CI SPOSIAMO!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true">
+            <span data-it="SCOPRI" data-es="DESCUBRE">SCOPRI</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M7 10l5 5 5-5"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ============================ NOMBRES GRANDES ============================ -->
+    <section class="names-showcase">
+        <div class="hero-background-text" aria-hidden="true">
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+        </div>
+
+        <div class="decoration cake" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="">
+        </div>
+        <div class="decoration rings" aria-hidden="true">
+            <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="">
+        </div>
+
+        <div class="names-showcase-content">
+            <div class="showcase-kicker" data-it="SIETE INVITATI" data-es="ESTÁN INVITADOS">SIETE INVITATI</div>
+            <div class="showcase-names">
+                <span>Vincenzo</span><span class="ampersand">&amp;</span><span>Lucia</span>
+            </div>
+            <div class="showcase-subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!">CI SPOSIAMO!</div>
+        </div>
+    </section>
+
+    <!-- ============================ SAVE THE DATE ============================ -->
+    <section class="section save-the-date-section" id="save-the-date">
+        <div class="section-inner">
+            <div class="std-container">
+                <h1 class="std-title" data-it="Save the date" data-es="Save the date">Save the date</h1>
+                <p class="std-description"
+                   data-it="Il nostro matrimonio si divide in due momenti speciali. La cerimonia civile sarà a Cesena, Italia, e la festa ufficiale sarà a Maiorca, Spagna. Vi raccontiamo tutto qui sotto!"
+                   data-es="Nuestra boda se divide en dos momentos especiales. La ceremonia civil será en Cesena, Italia, y la fiesta oficial será en Mallorca, España. ¡Os contamos todo aquí abajo!">Il nostro matrimonio si divide in due momenti speciali. La cerimonia civile sarà a Cesena, Italia, e la festa ufficiale sarà a Maiorca, Spagna.</p>
+
+                <div class="events-container">
+                    <div class="event-card">
+                        <div class="event-date">21.06.26</div>
+                        <div class="event-label" data-it="CERIMONIA CIVILE" data-es="CEREMONIA CIVIL">CERIMONIA CIVILE</div>
+                        <div class="event-location" data-it="Cesena, Italia" data-es="Cesena, Italia">Cesena, Italia</div>
+                    </div>
+
+                    <div class="events-divider" aria-hidden="true"></div>
+
+                    <div class="event-card">
+                        <div class="event-date blue">04.07.26</div>
+                        <div class="event-label" data-it="FESTA!" data-es="PARTY!">FESTA!</div>
+                        <div class="event-location" data-it="Maiorca, Spagna" data-es="Mallorca, España">Maiorca, Spagna</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEGUNDA PANTALLA CON NOMBRES GIGANTES (sin sobre) -->
-    <section class="hero hero-secondary" id="hero">
-        <div class="hero-content">
-            <!-- Fondo de texto decorativo -->
-            <div class="hero-background-text">
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-                <span>Amore • Amore • Amore • Amore • Amore • Amore</span>
-            </div>
-
-            <!-- Decoraciones laterales -->
-            <div class="decoration cake">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake decoration">
-            </div>
-            <div class="decoration rings">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="Rings decoration">
-            </div>
-
-            <!-- Contenedor con nombres gigantes (en el mismo lugar que el sobre) -->
-            <div class="secondary-view">
-                <div class="secondary-title" data-it="SIETE INVITATI" data-es="ESTÁN INVITADOS"></div>
-                <div class="bride-groom-names">
-                    <div data-it="Vincenzo" data-es="Vincenzo">Vincenzo</div>
-                    <span class="ampersand">&</span>
-                    <div data-it="Lucia" data-es="Lucia">Lucia</div>
-                </div>
-                <div class="secondary-subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SAVE THE DATE SECTION -->
-    <section class="save-the-date-section" id="save-the-date">
-        <div class="location-container">
-            <!-- Título -->
-            <h1 class="location-title">Save the date</h1>
-
-            <!-- Descripción -->
-            <p class="location-description" data-it="La nostra boda si divide in due momenti speciali. La cerimonia civile sarà a Cesena, Italia, e la festa ufficiale sarà a Maiorca, Spagna. Vi raccontiamo tutto qui sotto!" data-es="Nuestra boda se divide en dos momentos especiales. La ceremonia civil será en Cesena, Italia, y la fiesta oficial será en Mallorca, España. ¡Os contamos todo aquí abajo!">Nuestra boda se divide en dos momentos especiales. La ceremonia civil será en Cesena, Italia, y la fiesta oficial será en Mallorca, España. ¡Os contamos todo aquí abajo!</p>
-
-            <!-- Dos columnas: Civil y Party -->
-            <div class="events-container">
-                <!-- Columna izquierda: Ceremonia Civil -->
-                <div class="event-card">
-                    <div class="event-date" data-it="21.06.26" data-es="21.06.26">21.06.26</div>
-                    <div class="event-label" data-it="CERIMONIA CIVILE" data-es="CEREMONIA CIVIL">CEREMONIA CIVIL</div>
-                    <div class="event-location" data-it="Cesena, Italia" data-es="Cesena, Italia">Cesena, Italia</div>
-                </div>
-
-                <!-- Separador vertical -->
-                <div class="events-divider"></div>
-
-                <!-- Columna derecha: Party -->
-                <div class="event-card">
-                    <div class="event-date blue" data-it="04.07.26" data-es="04.07.26">04.07.26</div>
-                    <div class="event-label" data-it="FESTA!!" data-es="PARTY!!">PARTY!!</div>
-                    <div class="event-location" data-it="Maiorca, Spagna" data-es="Mallorca, España">Mallorca, España</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EL GRANDE GIORNO SECTION -->
-    <section class="grande-giorno" id="grande-giorno">
+    <!-- ============================ IL GRANDE GIORNO ============================ -->
+    <section class="grande-giorno-section" id="grande-giorno">
         <div class="grande-giorno-container">
-            <!-- Foto con rotación -->
             <div class="grande-giorno-image">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/pareja%20foto%20intermedio.JPG" alt="Pareja">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/pareja%20foto%20intermedio.JPG" alt="Vincenzo y Lucia">
             </div>
-
-            <!-- Contenido de texto -->
             <div class="grande-giorno-content">
-                <h2 class="grande-giorno-title" data-it="il grande giorno" data-es="el gran día">el gran día</h2>
-                <p class="grande-giorno-text" data-it="A Natale 2017 abbiamo ricevuto il regalo più bello che potessimo immaginare. Nel bel mezzo di un'avventura in Cina ci siamo conosciuti. Dopo anni di vita in tanti paesi, traslochi inaspettati e tempo trascorso lontani, è arrivato il momento di dire il sì. Questi anni di avventure per il mondo ci hanno fatto incontrare persone meravigliose lungo il cammino. Tu sei una di queste persone, e per questo vogliamo condividere questo momento con te." data-es="En Navidad 2017 recibimos el regalo más bonito que podíamos imaginar. En medio de una aventura en China nos conocimos. Después de años de vida en muchos países, mudanzas inesperadas y tiempo apartados, ha llegado el momento de decir el sí. Estos años de aventuras por el mundo nos han hecho encontrar personas maravillosas en el camino. Tú eres una de estas personas, y por eso queremos compartir este momento contigo.">En Navidad 2017 recibimos el regalo más bonito que podíamos imaginar. En medio de una aventura en China nos conocimos. Después de años de vida en muchos países, mudanzas inesperadas y tiempo apartados, ha llegado el momento de decir el sí. Estos años de aventuras por el mundo nos han hecho encontrar personas maravillosas en el camino. Tú eres una de estas personas, y por eso queremos compartir este momento contigo.</p>
+                <h2 class="grande-giorno-title" data-it="il grande giorno" data-es="el gran día">il grande giorno</h2>
+                <p class="grande-giorno-text"
+                   data-it="A Natale 2017 abbiamo ricevuto il regalo più bello che potessimo immaginare. Nel bel mezzo di un'avventura in Cina ci siamo conosciuti. Dopo anni di vita in tanti paesi, traslochi inaspettati e tempo trascorso lontani, è arrivato il momento di dire il sì. Questi anni di avventure per il mondo ci hanno fatto incontrare persone meravigliose lungo il cammino. Tu sei una di queste persone, e per questo vogliamo condividere questo momento con te."
+                   data-es="En Navidad 2017 recibimos el regalo más bonito que podíamos imaginar. En medio de una aventura en China nos conocimos. Después de años de vida en muchos países, mudanzas inesperadas y tiempo apartados, ha llegado el momento de decir el sí. Estos años de aventuras por el mundo nos han hecho encontrar personas maravillosas en el camino. Tú eres una de estas personas, y por eso queremos compartir este momento contigo.">En Navidad 2017...</p>
             </div>
         </div>
     </section>
 
-    <!-- LOCATION ITALIA SECTION -->
-    <section class="location-italia" id="location-italia">
-        <div class="location-italia-container">
-            <!-- Contenedor de 2 columnas -->
-            <div class="location-italia-grid">
-                <!-- COLUMNA IZQUIERDA -->
-                <div class="location-italia-left">
-                    <!-- Título Italia -->
-                    <h2 class="location-italia-title" data-it="Italia" data-es="Italia">Italia</h2>
+    <!-- ============================ LOCATION ITALIA ============================ -->
+    <section class="location-section section-alt" id="location-italia">
+        <div class="location-wrapper">
+            <div class="location-header">
+                <h2 class="location-title" data-it="Italia" data-es="Italia">Italia</h2>
+                <div class="location-decoration" aria-hidden="true">
+                    <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="">
+                </div>
+            </div>
 
-                    <!-- Sección Ceremonia -->
-                    <div class="ceremony-section">
-                        <h3 class="ceremony-title" data-it="CERIMONIA" data-es="CEREMONIA">CERIMONIA</h3>
-                        <p class="ceremony-description" data-it="La cerimonia si celebrerà nel Comune di Cesena, poi faremo un brindis. Tieni presente che il 21 giugno è il giorno della festa patronale di Cesena: il centro sarà trafficato, ma è una grande opportunità per vedere la città." data-es="La ceremonia se celebrará en el Comune de Cesena, luego haremos un brindis. Ten en cuenta que el 21 de junio es el día de la fiesta patronal de Cesena: el centro estará abarrotado, pero es una gran oportunidad para ver la ciudad.">La ceremonia se celebrará en el Comune de Cesena, luego haremos un brindis. Ten en cuenta que el 21 de junio es el día de la fiesta patronal de Cesena: el centro estará abarrotado, pero es una gran oportunidad para ver la ciudad.</p>
-                    </div>
-
-                    <!-- Fila con Fecha & Hora y Lugar -->
-                    <div class="ceremony-details">
-                        <div class="detail-item">
-                            <h4 class="detail-label" data-it="FECHA & HORA" data-es="FECHA & HORA">FECHA & HORA</h4>
-                            <p class="detail-value" data-it="Domingo 21 de Junio, 2026 | 11:30" data-es="Domingo 21 de Junio, 2026 | 11:30">Domingo 21 de Junio, 2026 | 11:30</p>
-                        </div>
-
-                        <div class="detail-item">
-                            <h4 class="detail-label" data-it="LUGAR" data-es="LUGAR">LUGAR</h4>
-                            <p class="detail-value" data-it="Sala degli Specchi, Comune Cesena" data-es="Sala degli Specchi, Comune Cesena">Sala degli Specchi, Comune Cesena</p>
-                        </div>
-                    </div>
+            <div class="location-content">
+                <div>
+                    <h3 class="location-kicker" data-it="CERIMONIA" data-es="CEREMONIA">CERIMONIA</h3>
+                    <p class="location-description"
+                       data-it="La cerimonia si celebrerà nel Comune di Cesena, poi faremo un brindisi. Tieni presente che il 21 giugno è il giorno della festa patronale di Cesena: il centro sarà trafficato, ma è una grande opportunità per vedere la città."
+                       data-es="La ceremonia se celebrará en el Comune de Cesena, luego haremos un brindis. Ten en cuenta que el 21 de junio es el día de la fiesta patronal de Cesena: el centro estará abarrotado, pero es una gran oportunidad para ver la ciudad.">La cerimonia...</p>
                 </div>
 
-                <!-- COLUMNA DERECHA -->
-                <div class="location-italia-right">
-                    <!-- Imagen decorativa -->
-                    <div class="location-italia-image">
-                        <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/anillo.png" alt="Rings">
+                <div class="location-details">
+                    <div class="detail-item">
+                        <h4 class="detail-label" data-it="DATA &amp; ORA" data-es="FECHA &amp; HORA">DATA &amp; ORA</h4>
+                        <p class="detail-value" data-it="Domenica 21 Giugno 2026 · 11:30" data-es="Domingo 21 de Junio 2026 · 11:30">Domenica 21 Giugno 2026 · 11:30</p>
                     </div>
 
-                    <!-- Botón COME ARRIVARE -->
-                    <a href="https://maps.app.goo.gl/HZz5tJQE8K9Z1QF77" target="_blank" class="come-arrivare-button">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <div class="detail-item">
+                        <h4 class="detail-label" data-it="LUOGO" data-es="LUGAR">LUOGO</h4>
+                        <p class="detail-value" data-it="Sala degli Specchi, Comune di Cesena" data-es="Sala degli Specchi, Comune di Cesena">Sala degli Specchi, Comune di Cesena</p>
+                    </div>
+
+                    <a href="https://maps.app.goo.gl/HZz5tJQE8K9Z1QF77" target="_blank" rel="noopener" class="btn-arrivare">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
@@ -1283,46 +1680,37 @@
         </div>
     </section>
 
-    <!-- LOCATION ESPAÑA SECTION -->
-    <section class="location-italia" id="location-espana">
-        <div class="location-italia-container">
-            <!-- Contenedor de 2 columnas -->
-            <div class="location-italia-grid">
-                <!-- COLUMNA IZQUIERDA -->
-                <div class="location-italia-left">
-                    <!-- Título España -->
-                    <h2 class="location-italia-title" data-it="Spagna" data-es="España">España</h2>
+    <!-- ============================ LOCATION ESPAÑA ============================ -->
+    <section class="location-section" id="location-espana">
+        <div class="location-wrapper">
+            <div class="location-header">
+                <h2 class="location-title" data-it="Spagna" data-es="España">Spagna</h2>
+                <div class="location-decoration" aria-hidden="true">
+                    <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="">
+                </div>
+            </div>
 
-                    <!-- Sección Party -->
-                    <div class="ceremony-section">
-                        <h3 class="ceremony-title" data-it="FESTA" data-es="PARTY">PARTY</h3>
-                        <p class="ceremony-description" data-it="La festa ufficiale! La nostra festa sarà al portals hills boutiquehotel un luogo magico tra le colline e il mare di Maiorca. Preparati per una notte indimenticabile!" data-es="¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!">¡La fiesta oficial! Nuestra fiesta será en portals hills boutiquehotel un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!</p>
-                    </div>
-
-                    <!-- Fila con Fecha & Hora y Lugar -->
-                    <div class="ceremony-details">
-                        <div class="detail-item">
-                            <h4 class="detail-label" data-it="FECHA & HORA" data-es="FECHA & HORA">FECHA & HORA</h4>
-                            <p class="detail-value" data-it="Sábado 4 de Julio, 2026 | 18:00" data-es="Sábado 4 de Julio, 2026 | 18:00">Sábado 4 de Julio, 2026 | 18:00</p>
-                        </div>
-
-                        <div class="detail-item">
-                            <h4 class="detail-label" data-it="LUGAR" data-es="LUGAR">LUGAR</h4>
-                            <p class="detail-value" data-it="Portals Hills Boutique Hotel" data-es="Portals Hills Boutique Hotel">Portals Hills Boutique Hotel</p>
-                        </div>
-                    </div>
+            <div class="location-content">
+                <div>
+                    <h3 class="location-kicker" data-it="FESTA" data-es="PARTY">FESTA</h3>
+                    <p class="location-description"
+                       data-it="La festa ufficiale! La nostra festa sarà al Portals Hills Boutique Hotel, un luogo magico tra le colline e il mare di Maiorca. Preparati per una notte indimenticabile!"
+                       data-es="¡La fiesta oficial! Nuestra fiesta será en el Portals Hills Boutique Hotel, un lugar mágico entre las colinas y el mar de Mallorca. ¡Prepárate para una noche inolvidable!">La festa ufficiale...</p>
                 </div>
 
-                <!-- COLUMNA DERECHA -->
-                <div class="location-italia-right">
-                    <!-- Imagen decorativa -->
-                    <div class="location-italia-image">
-                        <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/torta.png" alt="Cake">
+                <div class="location-details">
+                    <div class="detail-item">
+                        <h4 class="detail-label" data-it="DATA &amp; ORA" data-es="FECHA &amp; HORA">DATA &amp; ORA</h4>
+                        <p class="detail-value" data-it="Sabato 4 Luglio 2026 · 18:00" data-es="Sábado 4 de Julio 2026 · 18:00">Sabato 4 Luglio 2026 · 18:00</p>
                     </div>
 
-                    <!-- Botón COME ARRIVARE -->
-                    <a href="https://maps.app.goo.gl/3pxMvAdWob2FMUHS8" target="_blank" class="come-arrivare-button">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                    <div class="detail-item">
+                        <h4 class="detail-label" data-it="LUOGO" data-es="LUGAR">LUOGO</h4>
+                        <p class="detail-value" data-it="Portals Hills Boutique Hotel" data-es="Portals Hills Boutique Hotel">Portals Hills Boutique Hotel</p>
+                    </div>
+
+                    <a href="https://maps.app.goo.gl/3pxMvAdWob2FMUHS8" target="_blank" rel="noopener" class="btn-arrivare">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
                         </svg>
@@ -1333,127 +1721,481 @@
         </div>
     </section>
 
-    <!-- COUNTDOWN SECTION -->
-    <section class="countdown" id="countdown">
-        <div class="countdown-container">
-            <!-- Título -->
-            <h2 class="countdown-title" data-it="CUÁNTO FALTA PARA LA FIESTA" data-es="CUÁNTO FALTA PARA EL PARTY">CUÁNTO FALTA PARA EL PARTY</h2>
+    <!-- ============================ COUNTDOWN ============================ -->
+    <section class="countdown-section section-alt" id="countdown">
+        <div class="countdown-kicker" data-it="QUANTO MANCA ALLA FESTA" data-es="CUÁNTO FALTA PARA EL PARTY">QUANTO MANCA ALLA FESTA</div>
 
-            <!-- Contador -->
-            <div class="countdown-timer">
-                <!-- Días con círculo azul -->
-                <div class="countdown-item days-highlight">
-                    <div class="countdown-circle">
-                        <div class="countdown-value" id="days">00</div>
-                        <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/circulo-azul.png" alt="Blue circle" class="circle-image">
+        <div class="countdown-display" id="countdown">
+            <div class="countdown-unit">
+                <div class="countdown-circle-wrapper" aria-hidden="true">
+                    <svg viewBox="0 0 200 130" preserveAspectRatio="none">
+                        <!-- Círculo dibujado a mano con dos vueltas superpuestas -->
+                        <path d="M 100 18
+                                 C 155 18, 188 40, 188 66
+                                 C 188 95, 150 115, 100 115
+                                 C 48 115, 12 95, 12 66
+                                 C 12 38, 50 22, 100 20
+                                 C 150 18, 185 36, 188 64
+                                 C 188 92, 152 112, 100 113"/>
+                    </svg>
+                </div>
+                <div class="countdown-number" id="cd-days">00</div>
+                <div class="countdown-label" data-it="GIORNI" data-es="DÍAS">GIORNI</div>
+            </div>
+
+            <div class="countdown-unit">
+                <div class="countdown-number" id="cd-hours">00</div>
+                <div class="countdown-label" data-it="ORE" data-es="HORAS">ORE</div>
+            </div>
+
+            <div class="countdown-unit">
+                <div class="countdown-number" id="cd-minutes">00</div>
+                <div class="countdown-label" data-it="MIN" data-es="MIN">MIN</div>
+            </div>
+
+            <div class="countdown-unit">
+                <div class="countdown-number" id="cd-seconds">00</div>
+                <div class="countdown-label" data-it="SEC" data-es="SEG">SEC</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ PROGRAMA + DRESS CODE ============================ -->
+    <section class="programa-section" id="programa">
+        <div class="programa-wrapper">
+            <div class="programa-col">
+                <h2 class="programa-col-title" data-it="Programma" data-es="Programa">Programma</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="timeline-time">18:00</span>
+                        <span class="timeline-event" data-it="Cerimonia" data-es="Ceremonia">Cerimonia</span>
                     </div>
-                    <div class="countdown-label" data-it="DÍAS" data-es="DÍAS">DÍAS</div>
+                    <div class="timeline-item">
+                        <span class="timeline-time">19:00</span>
+                        <span class="timeline-event" data-it="Aperitivo" data-es="Aperitivo">Aperitivo</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-time">20:30</span>
+                        <span class="timeline-event" data-it="Cena" data-es="Cena">Cena</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-time">23:00</span>
+                        <span class="timeline-event" data-it="Festa" data-es="Fiesta">Festa</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-time">03:00</span>
+                        <span class="timeline-event" data-it="Chiusura festa" data-es="Cierre de fiesta">Chiusura festa</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="programa-col">
+                <h2 class="programa-col-title" data-it="Recezione" data-es="Recepción">Recezione</h2>
+
+                <div class="dresscode-block">
+                    <div class="dresscode-label" data-it="DRESS CODE" data-es="DRESS CODE">DRESS CODE</div>
+                    <p class="dresscode-text"
+                       data-it="Elegante ma comodo. Lino, tessuti naturali, scarpe comode (non cammineremo su erba o ghiaia). Il bianco è solo per la sposa. Si può portare giacca o americana senza cravatta. Non copritevi troppo, fa caldo."
+                       data-es="Elegante pero cómodo. Lino, tejidos naturales, zapatos cómodos (no caminaremos sobre hierba o grava). El blanco es solo para la novia. Se puede llevar chaqueta o americana sin corbata. No os cubráis demasiado, hace calor.">Elegante ma comodo...</p>
+
+                    <div class="dresscode-palette" aria-label="Paleta de colores sugerida">
+                        <div class="palette-swatch" style="background-color: #DDD2A7;" title="Crema"></div>
+                        <div class="palette-swatch" style="background-color: #B08858;" title="Tostado"></div>
+                        <div class="palette-swatch" style="background-color: #9BB394;" title="Verde salvia"></div>
+                        <div class="palette-swatch" style="background-color: #A9C2CB;" title="Azul polvo"></div>
+                        <div class="palette-swatch" style="background-color: #D0974C;" title="Ocre"></div>
+                        <div class="palette-swatch" style="background-color: #E0CDB8;" title="Beige"></div>
+                        <div class="palette-swatch" style="background-color: #6B8A6F;" title="Verde oliva"></div>
+                    </div>
                 </div>
 
-                <!-- Horas -->
-                <div class="countdown-item">
-                    <div class="countdown-value" id="hours">00</div>
-                    <div class="countdown-label" data-it="HORAS" data-es="HORAS">HORAS</div>
-                </div>
-
-                <!-- Minutos -->
-                <div class="countdown-item">
-                    <div class="countdown-value" id="minutes">00</div>
-                    <div class="countdown-label" data-it="MINUTOS" data-es="MINUTOS">MINUTOS</div>
-                </div>
-
-                <!-- Segundos -->
-                <div class="countdown-item">
-                    <div class="countdown-value" id="seconds">00</div>
-                    <div class="countdown-label" data-it="SEGUNDOS" data-es="SEGUNDOS">SEGUNDOS</div>
+                <div class="dresscode-block">
+                    <div class="dresscode-label" data-it="PARKING &amp; INDICAZIONI" data-es="PARKING &amp; CÓMO LLEGAR">PARKING &amp; INDICAZIONI</div>
+                    <p class="dresscode-text"
+                       data-it="C'è parcheggio disponibile presso l'hotel. Altrimenti potete parcheggiare fuori dove c'è spazio. Per le indicazioni stradali, vi consigliamo di utilizzare Google Maps."
+                       data-es="Hay parking disponible en el hotel. En caso contrario, podéis aparcar fuera donde haya sitio. Para las indicaciones, os recomendamos usar Google Maps.">C'è parcheggio...</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BOTTOM NAVIGATION -->
-    <nav class="bottom-nav">
+    <!-- ============================ ALGUNOS DETALLES ============================ -->
+    <section class="detalles-section section-alt" id="detalles">
+        <div class="detalles-container">
+            <div class="detalles-image">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/brindis.png" alt="Copas de brindis">
+            </div>
+
+            <div class="detalles-content">
+                <h2 class="detalles-title" data-it="alcuni dettagli..." data-es="algunos detalles...">alcuni dettagli...</h2>
+
+                <ul class="detalles-list">
+                    <li data-it="I regali sono un'opportunità per contribuire al nostro nuovo capitolo. Troverete i dati bancari qui sotto."
+                        data-es="Los regalos son una oportunidad para contribuir a nuestro nuevo capítulo. Encontraréis los datos bancarios a continuación.">Los regalos son una oportunidad para contribuir a nuestro nuevo capítulo. Encontraréis los datos bancarios a continuación.</li>
+                    <li data-it="Il microfono sarà aperto per chi vorrà condividere qualche parola o una storia durante la celebrazione."
+                        data-es="El micrófono estará abierto para quien quiera compartir unas palabras o una historia durante la celebración.">El micrófono estará abierto para quien quiera compartir unas palabras o una historia durante la celebración.</li>
+                    <li data-it="Vogliamo approfittare al massimo del tempo che avremo per stare insieme. In base alle persone presenti in ogni momento, organizzeremo incontri come picnic, spiaggia e altre attività. Vi terremo informati."
+                        data-es="Queremos aprovechar al máximo el tiempo que tendremos para estar con vosotros. En función de las personas presentes en cada momento, organizaremos encuentros como picnic, playa y otras actividades. Os mantendremos informados.">Queremos aprovechar al máximo el tiempo...</li>
+                    <li data-it="La vostra presenza è la cosa più importante per noi. Sappiamo che non è sempre facile essere fisicamente presenti, ma sarete con noi in ogni momento."
+                        data-es="Vuestra presencia es lo más importante para nosotros. Sabemos que no siempre es fácil estar físicamente presentes, pero estaréis con nosotros en cada momento.">Vuestra presencia es lo más importante para nosotros.</li>
+                </ul>
+
+                <div class="bank-block">
+                    <div class="bank-title" data-it="DATI BANCARI" data-es="DATOS BANCARIOS">DATI BANCARI</div>
+                    <div class="bank-details">
+                        <strong data-it="Intestatario:" data-es="Titular:">Intestatario:</strong> Lucia Pallas &amp; Vincenzo<br>
+                        <strong data-it="IBAN:" data-es="IBAN:">IBAN:</strong> <span class="bank-iban">ES00 0000 0000 0000 0000 0000</span><br>
+                        <strong data-it="Banca:" data-es="Banco:">Banca:</strong> <span data-it="(da completare)" data-es="(por completar)">(da completare)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ RSVP FORM ============================ -->
+    <section class="rsvp-section" id="rsvp">
+        <div class="rsvp-container">
+            <div class="rsvp-kicker" data-it="CONFERMA LA TUA PRESENZA" data-es="CONFIRMA TU ASISTENCIA">CONFERMA LA TUA PRESENZA</div>
+            <h2 class="rsvp-title" data-it="RSVP" data-es="RSVP">RSVP</h2>
+            <p class="rsvp-description"
+               data-it="Ogni adulto dovrebbe compilare il modulo una volta. Se viaggi con bambini o neonati, indicalo nel messaggio finale. Ti preghiamo di rispondere entro il 1° maggio 2026."
+               data-es="Cada adulto debería rellenar el formulario una vez. Si viajas con niños o bebés, indícalo en el mensaje final. Por favor responde antes del 1 de mayo de 2026.">Cada adulto debería rellenar el formulario una vez...</p>
+
+            <form class="rsvp-form" id="rsvpForm" novalidate>
+                <!-- Nombre -->
+                <div class="form-group">
+                    <label class="form-label" for="rsvp-name">
+                        <span data-it="NOME E COGNOME" data-es="NOMBRE Y APELLIDO">NOME E COGNOME</span>
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" id="rsvp-name" name="name" required autocomplete="name">
+                </div>
+
+                <!-- Asistencia -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <span data-it="PARTECIPAZIONE" data-es="ASISTENCIA">PARTECIPAZIONE</span>
+                        <span class="required">*</span>
+                    </label>
+                    <div class="form-radio-group" id="attendance-group">
+                        <label class="form-radio-option">
+                            <input type="radio" name="attendance" value="both" required>
+                            <span class="form-radio-custom"></span>
+                            <span class="form-radio-label" data-it="A entrambi gli eventi (Italia + Spagna)" data-es="A ambos eventos (Italia + España)">A entrambi gli eventi (Italia + Spagna)</span>
+                        </label>
+                        <label class="form-radio-option">
+                            <input type="radio" name="attendance" value="italy" required>
+                            <span class="form-radio-custom"></span>
+                            <span class="form-radio-label" data-it="Solo in Italia (Cesena)" data-es="Solo en Italia (Cesena)">Solo in Italia (Cesena)</span>
+                        </label>
+                        <label class="form-radio-option">
+                            <input type="radio" name="attendance" value="mallorca" required>
+                            <span class="form-radio-custom"></span>
+                            <span class="form-radio-label" data-it="Solo a Maiorca (Spagna)" data-es="Solo en Mallorca (España)">Solo a Maiorca (Spagna)</span>
+                        </label>
+                        <label class="form-radio-option">
+                            <input type="radio" name="attendance" value="none" required>
+                            <span class="form-radio-custom"></span>
+                            <span class="form-radio-label" data-it="Non potrò partecipare" data-es="No podré asistir">Non potrò partecipare</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Intolerancias -->
+                <div class="form-group">
+                    <label class="form-label" for="rsvp-diet">
+                        <span data-it="INTOLLERANZE ALIMENTARI" data-es="INTOLERANCIAS ALIMENTARIAS">INTOLLERANZE ALIMENTARI</span>
+                        <span class="optional" data-it="(opzionale)" data-es="(opcional)">(opzionale)</span>
+                    </label>
+                    <input type="text" class="form-input" id="rsvp-diet" name="diet"
+                           data-it-placeholder="Es. celiaco, vegetariano, allergie..." data-es-placeholder="Ej. celíaco, vegetariano, alergias..."
+                           placeholder="Es. celiaco, vegetariano, allergie...">
+                </div>
+
+                <!-- Fechas Mallorca (condicional) -->
+                <div class="conditional-group" id="mallorca-dates">
+                    <div class="conditional-row">
+                        <div class="form-group">
+                            <label class="form-label" for="rsvp-arrival">
+                                <span data-it="ARRIVO A MAIORCA" data-es="LLEGADA A MALLORCA">ARRIVO A MAIORCA</span>
+                                <span class="optional" data-it="(opzionale)" data-es="(opcional)">(opzionale)</span>
+                            </label>
+                            <input type="date" class="form-input" id="rsvp-arrival" name="arrival">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="rsvp-departure">
+                                <span data-it="PARTENZA DA MAIORCA" data-es="SALIDA DE MALLORCA">PARTENZA DA MAIORCA</span>
+                                <span class="optional" data-it="(opzionale)" data-es="(opcional)">(opzionale)</span>
+                            </label>
+                            <input type="date" class="form-input" id="rsvp-departure" name="departure">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mensaje -->
+                <div class="form-group">
+                    <label class="form-label" for="rsvp-message">
+                        <span data-it="MESSAGGIO AGGIUNTIVO" data-es="MENSAJE ADICIONAL">MESSAGGIO AGGIUNTIVO</span>
+                        <span class="optional" data-it="(bambini, neonati, altre note)" data-es="(niños, bebés, otras notas)">(bambini, neonati, altre note)</span>
+                    </label>
+                    <textarea class="form-textarea" id="rsvp-message" name="message"
+                              data-it-placeholder="Viaggio con i miei figli di 5 e 7 anni; mio marito non può venire..."
+                              data-es-placeholder="Viajo con mis hijos de 5 y 7 años; mi marido no puede venir..."
+                              placeholder="Viaggio con i miei figli di 5 e 7 anni..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="rsvpSubmit">
+                    <span data-it="INVIA CONFERMA" data-es="ENVIAR CONFIRMACIÓN">INVIA CONFERMA</span>
+                </button>
+
+                <div class="form-status" id="formStatus"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============================ LOS ESPERAMOS ============================ -->
+    <section class="esperamos-section" id="los-esperamos">
+        <div class="esperamos-bg-text" aria-hidden="true">
+            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
+            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
+            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
+            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
+            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
+        </div>
+
+        <div class="esperamos-container">
+            <div class="esperamos-content">
+                <div class="esperamos-kicker" data-it="VI ASPETTIAMO!" data-es="¡OS ESPERAMOS!">VI ASPETTIAMO!</div>
+                <div class="esperamos-names">
+                    <div>Vincenzo</div>
+                    <div><span class="amp">&amp;</span> Lucia</div>
+                </div>
+            </div>
+            <div class="esperamos-image">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/luciayvincenzo.jpg" alt="Vincenzo y Lucia">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ BOTTOM NAVIGATION ============================ -->
+    <nav class="bottom-nav" aria-label="Navegación principal">
         <a href="#save-the-date" data-it="LOCATION" data-es="LOCATION">LOCATION</a>
-        <a href="#grande-giorno" data-it="DRESS CODE" data-es="DRESS CODE">DRESS CODE</a>
-        <a href="#save-the-date" data-it="REGALI" data-es="REGALI">REGALI</a>
-        <a href="#rsvp" data-it="RSVP" data-es="RSVP">RSVP</a>
+        <a href="#programa" data-it="DRESS CODE" data-es="DRESS CODE">DRESS CODE</a>
+        <a href="#detalles" data-it="REGALI" data-es="REGALI">REGALI</a>
+        <a href="#rsvp" class="nav-rsvp" data-it="RSVP" data-es="RSVP">RSVP</a>
     </nav>
 
+    <!-- ============================ SCRIPTS ============================ -->
     <script>
-        // ===== LANGUAGE MANAGEMENT =====
-        const langButtons = document.querySelectorAll('.lang-btn');
-        let currentLanguage = localStorage.getItem('language') || 'it';
+        // ========================================
+        // LANGUAGE MANAGEMENT
+        // ========================================
+        (function() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            let currentLanguage = localStorage.getItem('weddingLang') || 'it';
 
-        function setLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem('language', lang);
+            function setLanguage(lang) {
+                currentLanguage = lang;
+                localStorage.setItem('weddingLang', lang);
+                document.documentElement.lang = lang === 'es' ? 'es' : 'it';
 
-            // Actualizar botones activos
+                langButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+
+                // Text content
+                document.querySelectorAll('[data-it][data-es]').forEach(el => {
+                    const text = el.dataset[lang];
+                    if (text !== undefined) el.textContent = text;
+                });
+
+                // Placeholders
+                document.querySelectorAll('[data-it-placeholder][data-es-placeholder]').forEach(el => {
+                    const ph = el.dataset[lang + 'Placeholder'];
+                    if (ph !== undefined) el.placeholder = ph;
+                });
+            }
+
             langButtons.forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
+                btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
             });
 
-            // Actualizar textos
-            document.querySelectorAll('[data-it][data-es]').forEach(el => {
-                el.textContent = el.dataset[lang];
+            setLanguage(currentLanguage);
+        })();
+
+        // ========================================
+        // COUNTDOWN — target: 4 julio 2026, 18:00 (Madrid/CEST)
+        // ========================================
+        (function() {
+            // 18:00 CEST = 16:00 UTC (julio = horario de verano en España)
+            const target = new Date('2026-07-04T16:00:00Z').getTime();
+
+            const elDays = document.getElementById('cd-days');
+            const elHours = document.getElementById('cd-hours');
+            const elMinutes = document.getElementById('cd-minutes');
+            const elSeconds = document.getElementById('cd-seconds');
+
+            function pad(n) { return String(n).padStart(2, '0'); }
+
+            function updateCountdown() {
+                const now = Date.now();
+                const diff = target - now;
+
+                if (diff <= 0) {
+                    elDays.textContent = '00';
+                    elHours.textContent = '00';
+                    elMinutes.textContent = '00';
+                    elSeconds.textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                elDays.textContent = pad(days);
+                elHours.textContent = pad(hours);
+                elMinutes.textContent = pad(minutes);
+                elSeconds.textContent = pad(seconds);
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        })();
+
+        // ========================================
+        // RSVP FORM
+        // ========================================
+        (function() {
+            const form = document.getElementById('rsvpForm');
+            if (!form) return;
+
+            const attendanceGroup = document.getElementById('attendance-group');
+            const mallorcaDates = document.getElementById('mallorca-dates');
+            const submitBtn = document.getElementById('rsvpSubmit');
+            const statusEl = document.getElementById('formStatus');
+
+            // URL del Google Apps Script
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQD6oZmV7iX16SYi6nFDwlkfGBzhWZupJnw-C2ItpOC2ckUcPtafG3LJSys0kNEaZG/exec';
+
+            // Show/hide Mallorca dates based on attendance selection + visual selected state
+            const radioOptions = document.querySelectorAll('.form-radio-option');
+            const radios = form.querySelectorAll('input[name="attendance"]');
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    // visual state
+                    radioOptions.forEach(opt => opt.classList.remove('selected'));
+                    radio.closest('.form-radio-option').classList.add('selected');
+
+                    // conditional mallorca block
+                    const val = radio.value;
+                    if (val === 'both' || val === 'mallorca') {
+                        mallorcaDates.classList.add('active');
+                    } else {
+                        mallorcaDates.classList.remove('active');
+                    }
+                });
             });
-        }
 
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
-        });
-
-        // Inicializar idioma
-        setLanguage(currentLanguage);
-
-        // ===== SCROLL ANIMATION =====
-        const envelopeContainer = document.getElementById('envelopeContainer');
-        const hero = document.querySelector('.hero');
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const heroHeight = hero.offsetHeight;
-            
-            // Ocultar el sobre cuando scrolleas más allá de un 10% del hero
-            if (scrollTop > heroHeight * 0.1) {
-                envelopeContainer.classList.add('hidden');
-            } else {
-                envelopeContainer.classList.remove('hidden');
-            }
-        });
-
-        // ===== COUNTDOWN TIMER =====
-        function updateCountdown() {
-            // Fecha objetivo: 4 de Julio de 2026 a las 18:00
-            const targetDate = new Date('2026-07-04T18:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance < 0) {
-                // Countdown terminado
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
+            function showStatus(message, type) {
+                statusEl.textContent = message;
+                statusEl.className = 'form-status ' + type;
             }
 
-            // Calcular tiempo
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            function getLang() {
+                return localStorage.getItem('weddingLang') || 'it';
+            }
 
-            // Actualizar valores con formato de 2 dígitos
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-        }
+            function t(it, es) {
+                return getLang() === 'es' ? es : it;
+            }
 
-        // Actualizar countdown cada segundo
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Validación mínima
+                const name = form.name.value.trim();
+                const attendance = form.attendance.value;
+
+                if (!name) {
+                    showStatus(t('Per favore inserisci il tuo nome.', 'Por favor introduce tu nombre.'), 'error');
+                    return;
+                }
+                if (!attendance) {
+                    showStatus(t('Seleziona un\'opzione di partecipazione.', 'Selecciona una opción de asistencia.'), 'error');
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = `<span>${t('INVIO IN CORSO...', 'ENVIANDO...')}</span>`;
+                statusEl.className = 'form-status';
+                statusEl.textContent = '';
+
+                // Mapeo de valores a texto legible para la hoja
+                const attendanceMap = {
+                    'both': t('Entrambi gli eventi', 'Ambos eventos'),
+                    'italy': t('Solo Italia (Cesena)', 'Solo Italia (Cesena)'),
+                    'mallorca': t('Solo Maiorca (Spagna)', 'Solo Mallorca (España)'),
+                    'none': t('Non posso partecipare', 'No puede asistir')
+                };
+
+                const payload = {
+                    name: name,
+                    attendance: attendanceMap[attendance] || attendance,
+                    attendanceCode: attendance,
+                    diet: form.diet.value.trim(),
+                    arrival: form.arrival.value,
+                    departure: form.departure.value,
+                    message: form.message.value.trim(),
+                    language: getLang()
+                };
+
+                try {
+                    // Enviar como FormData para evitar CORS preflight
+                    const formData = new FormData();
+                    Object.keys(payload).forEach(key => {
+                        formData.append(key, payload[key]);
+                    });
+
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    // Apps Script a veces devuelve text/plain, intentamos parsear JSON si se puede
+                    const text = await response.text();
+                    let result;
+                    try { result = JSON.parse(text); } catch { result = { status: 'ok' }; }
+
+                    if (response.ok && (result.status === 'ok' || result.result === 'success' || !result.error)) {
+                        showStatus(
+                            t('Grazie! La tua conferma è stata ricevuta. Non vediamo l\'ora di festeggiare con te ♥',
+                              '¡Gracias! Tu confirmación se ha recibido. ¡Tenemos muchas ganas de celebrar contigo ♥'),
+                            'success'
+                        );
+                        form.reset();
+                        radioOptions.forEach(opt => opt.classList.remove('selected'));
+                        mallorcaDates.classList.remove('active');
+                    } else {
+                        throw new Error(result.error || 'Unknown error');
+                    }
+                } catch (err) {
+                    console.error('RSVP error:', err);
+                    showStatus(
+                        t('Qualcosa è andato storto. Riprova o scrivici direttamente.',
+                          'Algo salió mal. Inténtalo de nuevo o escríbenos directamente.'),
+                        'error'
+                    );
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                }
+            });
+        })();
     </script>
 </body>
 </html>
