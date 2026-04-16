@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vincenzo & Lucia · Ci Sposiamo!</title>
-    <meta name="description" content="Invitación de boda de Vincenzo y Lucia. 21.06.2026 Cesena · 04.07.2026 Mallorca">
+    <title>Vincenzo & Lucia Wedding RSVP</title>
+    <meta name="description" content="Vincenzo & Lucia Wedding RSVP · 21.06.2026 Cesena · 04.07.2026 Mallorca">
+
+    <!-- Open Graph / WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Vincenzo & Lucia Wedding RSVP">
+    <meta property="og:description" content="Confirma tu asistencia · 21.06.2026 Cesena · 04.07.2026 Mallorca">
+    <meta property="og:image" content="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Vincenzo & Lucia Wedding">
+    <meta property="og:url" content="https://lupallas.github.io/boda-lucia-vincenzo/">
+    <meta property="og:site_name" content="Vincenzo & Lucia Wedding">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale:alternate" content="es_ES">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vincenzo & Lucia Wedding RSVP">
+    <meta name="twitter:description" content="Confirma tu asistencia · 21.06.2026 Cesena · 04.07.2026 Mallorca">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png">
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#4460F3">
+
+    <!-- Favicon (emoji como fallback rápido) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Homemade+Apple&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Homemade+Apple&family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         /* ==========================================
            DESIGN TOKENS
            ========================================== */
         :root {
             --color-bg: #F9F7F5;
-            --color-bg-alt: #F3EFEB;
             --color-ink: #2D2B25;
             --color-ink-soft: #525252;
             --color-ink-faint: #8A857E;
@@ -41,6 +67,10 @@
 
         html {
             scroll-behavior: smooth;
+            /* Scroll Snap a nivel html */
+            scroll-snap-type: y mandatory;
+            height: 100%;
+            overflow-y: scroll;
         }
 
         body {
@@ -52,11 +82,35 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            min-height: 100%;
         }
 
         img {
             max-width: 100%;
             display: block;
+        }
+
+        /* ==========================================
+           SCROLL SNAP - cada sección es un snap point
+           ========================================== */
+        .snap {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            min-height: 100vh;
+            min-height: 100dvh; /* dynamic viewport height para mobile */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 80px 40px calc(var(--nav-height) + 40px);
+        }
+
+        /* Desactivar snap en pantallas pequeñas para mejor usabilidad si el contenido excede */
+        @media (max-height: 700px) {
+            html {
+                scroll-snap-type: y proximity;
+            }
         }
 
         /* ==========================================
@@ -73,7 +127,7 @@
             border: 1px solid var(--color-line);
             border-radius: 2px;
             padding: 6px 10px;
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: rgba(249, 247, 245, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
@@ -108,56 +162,63 @@
         }
 
         /* ==========================================
-           HERO — SOBRE (single unified hero with scroll transition)
+           FONDO "AMORE" FLUIDO - centrado vertical y desfasado
            ========================================== */
-        .hero {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--color-bg);
-            position: relative;
-            overflow: hidden;
-            padding: 40px 20px;
-        }
-
-        .hero-background-text {
+        .amore-bg {
             position: absolute;
             inset: 0;
-            font-family: var(--font-hand);
-            font-size: 44px;
-            color: rgba(209, 201, 193, 0.2);
             overflow: hidden;
             pointer-events: none;
-            line-height: 1.9;
             user-select: none;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .hero-background-text span {
-            display: block;
-            text-align: center;
+        .amore-bg .amore-row {
+            font-family: var(--font-hand);
+            font-size: clamp(32px, 5vw, 52px);
+            color: rgba(209, 201, 193, 0.55);
             white-space: nowrap;
+            line-height: 2.2;
+            letter-spacing: 0.5px;
+        }
+
+        /* Desfase alternado fila por fila - usando translateX con porcentajes diferentes */
+        .amore-bg .amore-row:nth-child(1) { transform: translateX(-8%); }
+        .amore-bg .amore-row:nth-child(2) { transform: translateX(-22%); }
+        .amore-bg .amore-row:nth-child(3) { transform: translateX(4%); }
+        .amore-bg .amore-row:nth-child(4) { transform: translateX(-18%); }
+        .amore-bg .amore-row:nth-child(5) { transform: translateX(-5%); }
+        .amore-bg .amore-row:nth-child(6) { transform: translateX(-28%); }
+        .amore-bg .amore-row:nth-child(7) { transform: translateX(2%); }
+
+        /* ==========================================
+           HERO — SOBRE
+           ========================================== */
+        .hero {
+            overflow: hidden;
         }
 
         /* Decoraciones laterales */
         .decoration {
             position: absolute;
-            width: 90px;
-            height: 90px;
-            opacity: 0.85;
+            width: 100px;
+            height: 100px;
+            opacity: 0.9;
             z-index: 2;
             pointer-events: none;
         }
 
         .decoration.cake {
-            left: 4%;
+            left: 5%;
             top: 50%;
             transform: translateY(-50%);
         }
 
         .decoration.rings {
-            right: 4%;
+            right: 5%;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -172,17 +233,18 @@
         .envelope-wrapper {
             position: relative;
             z-index: 10;
-            filter: drop-shadow(0 20px 50px rgba(45, 43, 37, 0.12));
-            animation: floatEnvelope 4s ease-in-out infinite;
+            filter: drop-shadow(0 20px 50px rgba(45, 43, 37, 0.15));
+            animation: floatEnvelope 4.5s ease-in-out infinite;
+            margin: 0 auto;
         }
 
         @keyframes floatEnvelope {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-16px); }
+            50% { transform: translateY(-14px); }
         }
 
         .envelope {
-            width: min(650px, 88vw);
+            width: min(680px, 88vw);
             aspect-ratio: 1.357 / 1;
             position: relative;
         }
@@ -216,10 +278,10 @@
 
         .envelope-names {
             font-family: var(--font-hand);
-            font-size: clamp(38px, 6.5vw, 54px);
+            font-size: clamp(34px, 5.5vw, 48px);
             color: var(--color-ink);
             margin-bottom: 16px;
-            line-height: 1.2;
+            line-height: 1.25;
         }
 
         .envelope-names > div {
@@ -251,7 +313,7 @@
         /* Hint de scroll */
         .scroll-hint {
             position: absolute;
-            bottom: 40px;
+            bottom: calc(var(--nav-height) + 24px);
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -273,39 +335,25 @@
         }
 
         @keyframes scrollBounce {
-            0%, 100% { transform: translate(-50%, 0); opacity: 0.7; }
+            0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
             50% { transform: translate(-50%, 6px); opacity: 1; }
         }
 
         /* ==========================================
-           SECTION: NOMBRES GRANDES (antes era hero-secondary)
+           NOMBRES SHOWCASE
            ========================================== */
-        .names-showcase {
-            width: 100%;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--color-bg);
-            position: relative;
-            overflow: hidden;
-            padding: 80px 20px;
-        }
-
-        .names-showcase .hero-background-text {
-            font-size: 40px;
-        }
-
         .names-showcase-content {
             position: relative;
             z-index: 10;
             text-align: center;
             width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .showcase-kicker {
             font-family: var(--font-sans);
-            font-size: 12px;
+            font-size: clamp(11px, 1.4vw, 13px);
             letter-spacing: 3.5px;
             text-transform: uppercase;
             color: var(--color-ink-soft);
@@ -315,74 +363,66 @@
 
         .showcase-names {
             font-family: var(--font-hand);
-            font-size: clamp(64px, 13vw, 128px);
+            font-size: clamp(52px, 10vw, 120px);
             color: var(--color-ink);
-            line-height: 1.05;
+            line-height: 1.1;
             margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         .showcase-names .ampersand {
             color: var(--color-accent);
             display: inline-block;
-            margin: 0 20px;
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-weight: 500;
-            font-size: 0.75em;
-            vertical-align: middle;
+            /* MANTIENE la misma tipografía handwritten */
+            font-family: var(--font-hand);
+            font-size: 0.55em;
+            line-height: 1;
+            margin: 4px 0;
         }
 
         .showcase-subtitle {
             font-family: var(--font-sans);
-            font-size: 13px;
+            font-size: clamp(11px, 1.4vw, 13px);
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--color-accent);
             font-weight: 600;
+            margin-top: 20px;
         }
 
         /* ==========================================
-           SAVE THE DATE SECTION
+           SAVE THE DATE
            ========================================== */
-        .section {
-            width: 100%;
-            padding: 120px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .section-inner {
-            max-width: var(--max-content);
-            width: 100%;
-        }
-
-        .save-the-date-section {
-            min-height: 90vh;
-        }
-
         .std-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            max-width: var(--max-content);
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            width: 100%;
         }
 
         .std-title {
             font-family: var(--font-hand);
-            font-size: clamp(42px, 5.5vw, 60px);
+            font-size: clamp(40px, 6vw, 64px);
             color: var(--color-accent);
-            margin-bottom: 36px;
+            margin-bottom: 32px;
             line-height: 1.15;
             font-weight: 400;
         }
 
         .std-description {
             font-family: var(--font-serif);
-            font-size: clamp(18px, 2vw, 22px);
+            font-size: clamp(17px, 1.9vw, 22px);
             color: var(--color-ink-soft);
-            margin-bottom: 70px;
-            line-height: 1.8;
+            margin-bottom: 60px;
+            line-height: 1.7;
             max-width: 720px;
             font-weight: 400;
         }
@@ -391,7 +431,7 @@
             display: flex;
             justify-content: center;
             align-items: stretch;
-            gap: 70px;
+            gap: clamp(30px, 6vw, 70px);
             width: 100%;
             flex-wrap: wrap;
         }
@@ -401,12 +441,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
         }
 
         .event-date {
             font-family: var(--font-serif);
-            font-size: 52px;
+            font-size: clamp(36px, 4.5vw, 52px);
             color: var(--color-ink);
             font-weight: 400;
             letter-spacing: 1px;
@@ -428,7 +468,7 @@
 
         .event-location {
             font-family: var(--font-serif);
-            font-size: 20px;
+            font-size: clamp(17px, 1.8vw, 20px);
             color: var(--color-ink);
             font-weight: 400;
             font-style: italic;
@@ -444,20 +484,19 @@
         /* ==========================================
            IL GRANDE GIORNO
            ========================================== */
-        .grande-giorno-section {
-            padding: 80px 40px;
-        }
-
         .grande-giorno-container {
             display: flex;
             align-items: center;
-            gap: 90px;
+            gap: clamp(40px, 7vw, 90px);
             max-width: var(--max-content);
             margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         .grande-giorno-image {
-            flex: 0 0 380px;
+            flex: 0 0 clamp(260px, 32vw, 380px);
             position: relative;
         }
 
@@ -475,12 +514,13 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 28px;
+            gap: 24px;
+            min-width: 0;
         }
 
         .grande-giorno-title {
             font-family: var(--font-hand);
-            font-size: clamp(34px, 4.5vw, 48px);
+            font-size: clamp(32px, 4.5vw, 48px);
             color: var(--color-accent);
             line-height: 1.15;
             font-weight: 400;
@@ -488,25 +528,23 @@
 
         .grande-giorno-text {
             font-family: var(--font-serif);
-            font-size: clamp(17px, 1.6vw, 20px);
+            font-size: clamp(15px, 1.5vw, 19px);
             color: var(--color-ink-soft);
-            line-height: 1.9;
-            max-width: 620px;
+            line-height: 1.8;
         }
 
         /* ==========================================
            LOCATION ITALIA & ESPAÑA
            ========================================== */
-        .location-section {
-            padding: 110px 40px;
-        }
-
         .location-wrapper {
             max-width: var(--max-content);
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: clamp(30px, 5vw, 60px);
+            width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         .location-header {
@@ -518,7 +556,7 @@
 
         .location-title {
             font-family: var(--font-hand);
-            font-size: clamp(54px, 8vw, 88px);
+            font-size: clamp(48px, 8vw, 88px);
             color: var(--color-ink);
             line-height: 1.05;
             font-weight: 400;
@@ -527,8 +565,8 @@
 
         .location-decoration {
             flex: 0 0 auto;
-            width: 130px;
-            height: 130px;
+            width: clamp(80px, 11vw, 130px);
+            height: clamp(80px, 11vw, 130px);
         }
 
         .location-decoration img {
@@ -540,7 +578,7 @@
         .location-content {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 30px;
             max-width: 900px;
         }
 
@@ -555,23 +593,23 @@
 
         .location-description {
             font-family: var(--font-serif);
-            font-size: clamp(16px, 1.5vw, 19px);
+            font-size: clamp(15px, 1.5vw, 18px);
             color: var(--color-ink-soft);
-            line-height: 1.9;
-            margin-top: 12px;
+            line-height: 1.8;
+            margin-top: 10px;
         }
 
         .location-details {
             display: flex;
             align-items: flex-end;
-            gap: 80px;
+            gap: clamp(30px, 5vw, 70px);
             flex-wrap: wrap;
         }
 
         .detail-item {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .detail-label {
@@ -585,7 +623,7 @@
 
         .detail-value {
             font-family: var(--font-serif);
-            font-size: 17px;
+            font-size: clamp(15px, 1.4vw, 17px);
             color: var(--color-ink);
             font-weight: 400;
         }
@@ -593,7 +631,7 @@
         .btn-arrivare {
             background-color: var(--color-accent);
             color: white;
-            padding: 16px 28px;
+            padding: 14px 26px;
             border: none;
             font-family: var(--font-sans);
             font-size: 11px;
@@ -620,36 +658,29 @@
             height: 16px;
         }
 
-        /* Alternating backgrounds */
-        .section-alt {
-            background-color: var(--color-bg-alt);
-        }
-
         /* ==========================================
            PROGRAMA + DRESS CODE
            ========================================== */
-        .programa-section {
-            padding: 110px 40px;
-        }
-
         .programa-wrapper {
             max-width: var(--max-content);
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 100px;
+            gap: clamp(40px, 7vw, 100px);
+            width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         .programa-col-title {
             font-family: var(--font-serif);
-            font-size: clamp(36px, 4vw, 44px);
+            font-size: clamp(30px, 3.8vw, 42px);
             color: var(--color-ink);
-            margin-bottom: 36px;
+            margin-bottom: 28px;
             font-weight: 400;
             letter-spacing: 0.5px;
         }
 
-        /* Programa timeline */
         .timeline {
             display: flex;
             flex-direction: column;
@@ -658,8 +689,8 @@
         .timeline-item {
             display: flex;
             align-items: baseline;
-            gap: 40px;
-            padding: 22px 0;
+            gap: clamp(20px, 3vw, 40px);
+            padding: clamp(16px, 2vw, 22px) 0;
             border-bottom: 1px dashed var(--color-line);
         }
 
@@ -669,24 +700,27 @@
 
         .timeline-time {
             font-family: var(--font-sans);
-            font-size: 14px;
+            font-size: clamp(13px, 1.3vw, 14px);
             color: var(--color-ink-soft);
             font-weight: 400;
-            min-width: 60px;
+            min-width: 56px;
             letter-spacing: 0.5px;
         }
 
         .timeline-event {
             font-family: var(--font-serif);
-            font-size: 22px;
+            font-size: clamp(18px, 2vw, 22px);
             color: var(--color-ink);
             font-weight: 400;
             font-style: italic;
         }
 
-        /* Dress code */
         .dresscode-block {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
+        }
+
+        .dresscode-block:last-child {
+            margin-bottom: 0;
         }
 
         .dresscode-label {
@@ -696,32 +730,33 @@
             letter-spacing: 2.5px;
             text-transform: uppercase;
             font-weight: 600;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
         .dresscode-text {
             font-family: var(--font-serif);
-            font-size: 17px;
+            font-size: clamp(15px, 1.5vw, 17px);
             color: var(--color-ink-soft);
-            line-height: 1.85;
-            margin-bottom: 26px;
+            line-height: 1.75;
+            margin-bottom: 24px;
         }
 
+        /* Paleta SIN fondo - solo los círculos */
         .dresscode-palette {
             display: flex;
             gap: 14px;
             flex-wrap: wrap;
-            padding: 22px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 2px;
-            border: 1px solid var(--color-line-soft);
+            padding: 0;
+            background: transparent;
+            border: none;
         }
 
         .palette-swatch {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06),
+                        0 2px 6px rgba(45, 43, 37, 0.08);
             flex-shrink: 0;
         }
 
@@ -729,26 +764,30 @@
            COUNTDOWN
            ========================================== */
         .countdown-section {
-            padding: 130px 40px;
             text-align: center;
+            align-items: center;
         }
 
         .countdown-kicker {
             font-family: var(--font-sans);
-            font-size: 13px;
+            font-size: clamp(12px, 1.4vw, 13px);
             letter-spacing: 3.5px;
             text-transform: uppercase;
             color: var(--color-ink-soft);
             font-weight: 500;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 2;
         }
 
         .countdown-display {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: clamp(24px, 6vw, 90px);
+            gap: clamp(18px, 5vw, 80px);
             flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
 
         .countdown-unit {
@@ -761,12 +800,14 @@
 
         .countdown-number {
             font-family: var(--font-serif);
-            font-size: clamp(72px, 10vw, 128px);
+            font-size: clamp(60px, 10vw, 120px);
             font-weight: 400;
             color: var(--color-ink);
             line-height: 1;
             position: relative;
             z-index: 2;
+            min-width: 1.4em;
+            text-align: center;
         }
 
         .countdown-label {
@@ -778,14 +819,13 @@
             font-weight: 500;
         }
 
-        /* Círculo SVG dibujado a mano sobre los días */
         .countdown-circle-wrapper {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -54%);
-            width: 145%;
-            height: 110%;
+            width: 150%;
+            height: 115%;
             pointer-events: none;
             z-index: 1;
         }
@@ -812,19 +852,18 @@
         }
 
         /* ==========================================
-           ALGUNOS DETALLES
+           ALGUNOS DETALLES (sin el bloque de bancos)
            ========================================== */
-        .detalles-section {
-            padding: 110px 40px;
-        }
-
         .detalles-container {
             max-width: var(--max-content);
             margin: 0 auto;
             display: grid;
             grid-template-columns: 0.9fr 1fr;
-            gap: 80px;
+            gap: clamp(40px, 7vw, 80px);
             align-items: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         .detalles-image {
@@ -834,21 +873,22 @@
         }
 
         .detalles-image img {
-            max-width: 360px;
+            max-width: 340px;
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 10px 30px rgba(45, 43, 37, 0.08));
+            filter: drop-shadow(0 10px 30px rgba(45, 43, 37, 0.1));
         }
 
         .detalles-content {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 26px;
+            min-width: 0;
         }
 
         .detalles-title {
             font-family: var(--font-hand);
-            font-size: clamp(34px, 4.2vw, 46px);
+            font-size: clamp(30px, 4vw, 44px);
             color: var(--color-ink);
             line-height: 1.15;
             font-weight: 400;
@@ -859,15 +899,15 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
         }
 
         .detalles-list li {
             font-family: var(--font-serif);
-            font-size: clamp(16px, 1.4vw, 18px);
+            font-size: clamp(15px, 1.4vw, 18px);
             color: var(--color-ink-soft);
-            line-height: 1.75;
-            padding-left: 26px;
+            line-height: 1.7;
+            padding-left: 22px;
             position: relative;
         }
 
@@ -875,65 +915,167 @@
             content: '';
             position: absolute;
             left: 0;
-            top: 12px;
+            top: 11px;
             width: 6px;
             height: 6px;
             background-color: var(--color-accent);
             border-radius: 50%;
         }
 
-        /* Bank details block */
-        .bank-block {
-            margin-top: 30px;
-            padding: 28px 30px;
-            background-color: rgba(255, 255, 255, 0.7);
-            border-left: 3px solid var(--color-accent);
+        /* ==========================================
+           REGALOS / DATI BANCARI (sección dedicada)
+           ========================================== */
+        .regali-section {
+            text-align: center;
+            align-items: center;
         }
 
-        .bank-title {
+        .regali-wrapper {
+            max-width: var(--max-content);
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .regali-kicker {
             font-family: var(--font-sans);
-            font-size: 11px;
-            color: var(--color-ink);
-            letter-spacing: 2.5px;
+            font-size: clamp(11px, 1.3vw, 13px);
+            letter-spacing: 3.5px;
             text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 14px;
-        }
-
-        .bank-details {
-            font-family: var(--font-serif);
-            font-size: 16px;
             color: var(--color-ink-soft);
-            line-height: 1.8;
+            font-weight: 600;
         }
 
-        .bank-details strong {
+        .regali-title {
+            font-family: var(--font-hand);
+            font-size: clamp(40px, 6vw, 64px);
+            color: var(--color-accent);
+            line-height: 1.1;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .regali-intro {
+            font-family: var(--font-serif);
+            font-size: clamp(16px, 1.6vw, 19px);
+            color: var(--color-ink-soft);
+            line-height: 1.75;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .banks-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(20px, 3vw, 32px);
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+
+        .bank-card {
+            background-color: rgba(255, 255, 255, 0.65);
+            border: 1px solid var(--color-line-soft);
+            border-left: 3px solid var(--color-accent);
+            padding: clamp(24px, 3vw, 32px);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .bank-card:hover {
+            box-shadow: 0 10px 30px rgba(45, 43, 37, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .bank-card-name {
+            font-family: var(--font-serif);
+            font-size: clamp(20px, 2.2vw, 26px);
             color: var(--color-ink);
             font-weight: 500;
-            font-family: var(--font-sans);
-            font-size: 14px;
-            letter-spacing: 0.5px;
+            font-style: italic;
+            line-height: 1.2;
         }
 
-        .bank-iban {
-            font-family: 'Courier New', monospace;
-            font-size: 15px;
+        .bank-card-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .bank-card-label {
+            font-family: var(--font-sans);
+            font-size: 10px;
+            color: var(--color-ink-faint);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .bank-card-value {
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace;
+            font-size: clamp(13px, 1.3vw, 15px);
             color: var(--color-ink);
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
+            word-break: break-word;
+        }
+
+        .bank-card-bank {
+            font-family: var(--font-serif);
+            font-size: clamp(15px, 1.5vw, 17px);
+            color: var(--color-ink-soft);
+            font-style: italic;
+        }
+
+        .copy-iban {
+            margin-top: 8px;
+            background: none;
+            border: 1px solid var(--color-line);
+            color: var(--color-ink-soft);
+            padding: 8px 14px;
+            font-family: var(--font-sans);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            align-self: flex-start;
+            border-radius: 2px;
+        }
+
+        .copy-iban:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .copy-iban.copied {
+            background-color: var(--color-accent);
+            color: white;
+            border-color: var(--color-accent);
         }
 
         /* ==========================================
            RSVP FORM
            ========================================== */
         .rsvp-section {
-            padding: 120px 40px;
-            background-color: var(--color-bg-alt);
+            align-items: center;
         }
 
         .rsvp-container {
             max-width: 720px;
             margin: 0 auto;
             text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
         .rsvp-kicker {
@@ -942,25 +1084,30 @@
             letter-spacing: 3.5px;
             text-transform: uppercase;
             color: var(--color-ink-soft);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             font-weight: 600;
         }
 
+        /* NUEVO: RSVP en Garamond mayúsculas con tracking, legible */
         .rsvp-title {
-            font-family: var(--font-hand);
-            font-size: clamp(44px, 6vw, 64px);
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 8vw, 82px);
             color: var(--color-accent);
-            line-height: 1.1;
-            font-weight: 400;
+            line-height: 1;
+            font-weight: 600;
             margin-bottom: 24px;
+            letter-spacing: clamp(6px, 1vw, 14px);
+            text-transform: uppercase;
+            /* Compensar el tracking visual */
+            padding-left: clamp(6px, 1vw, 14px);
         }
 
         .rsvp-description {
             font-family: var(--font-serif);
-            font-size: clamp(17px, 1.6vw, 19px);
+            font-size: clamp(16px, 1.6vw, 19px);
             color: var(--color-ink-soft);
-            line-height: 1.8;
-            margin-bottom: 50px;
+            line-height: 1.75;
+            margin-bottom: 44px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -969,14 +1116,14 @@
         .rsvp-form {
             display: flex;
             flex-direction: column;
-            gap: 28px;
+            gap: 24px;
             text-align: left;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .form-label {
@@ -1015,6 +1162,7 @@
             color: var(--color-ink);
             transition: border-color 0.2s ease, background-color 0.2s ease;
             border-radius: 2px;
+            font-weight: 400;
         }
 
         .form-input:focus,
@@ -1025,87 +1173,40 @@
             background-color: #fff;
         }
 
+        /* Dropdown custom styling - chevron SVG */
+        .form-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23525252' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 44px;
+            cursor: pointer;
+        }
+
+        .form-select:invalid {
+            color: var(--color-ink-faint);
+        }
+
+        .form-select option {
+            color: var(--color-ink);
+            font-family: var(--font-serif);
+        }
+
         .form-textarea {
             min-height: 100px;
             resize: vertical;
             font-family: var(--font-serif);
         }
 
-        /* Radio options (asistencia) */
-        .form-radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .form-radio-option {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 18px;
-            border: 1px solid var(--color-line);
-            background-color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-radius: 2px;
-        }
-
-        .form-radio-option:hover {
-            border-color: var(--color-accent-soft);
-        }
-
-        .form-radio-option input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .form-radio-custom {
-            width: 18px;
-            height: 18px;
-            border: 1.5px solid var(--color-line);
-            border-radius: 50%;
-            flex-shrink: 0;
-            position: relative;
-            transition: border-color 0.2s ease;
-        }
-
-        .form-radio-option input[type="radio"]:checked + .form-radio-custom {
-            border-color: var(--color-accent);
-        }
-
-        .form-radio-option input[type="radio"]:checked + .form-radio-custom::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 10px;
-            height: 10px;
-            background-color: var(--color-accent);
-            border-radius: 50%;
-        }
-
-        .form-radio-option.selected {
-            border-color: var(--color-accent);
-            background-color: var(--color-accent-faint);
-        }
-
-        .form-radio-label {
-            font-family: var(--font-serif);
-            font-size: 17px;
-            color: var(--color-ink);
-            flex: 1;
-        }
-
         /* Conditional group */
         .conditional-group {
             display: none;
             flex-direction: column;
-            gap: 24px;
-            padding: 24px;
+            gap: 20px;
+            padding: 22px;
             background-color: rgba(68, 96, 243, 0.04);
             border-left: 3px solid var(--color-accent);
             animation: fadeSlide 0.4s ease;
@@ -1123,7 +1224,7 @@
         .conditional-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 18px;
+            gap: 16px;
         }
 
         .btn-submit {
@@ -1138,7 +1239,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
+            margin-top: 8px;
             align-self: center;
             min-width: 220px;
         }
@@ -1155,13 +1256,14 @@
         }
 
         .form-status {
-            margin-top: 24px;
-            padding: 18px;
+            margin-top: 20px;
+            padding: 16px;
             border-radius: 2px;
             font-family: var(--font-serif);
             font-size: 16px;
             text-align: center;
             display: none;
+            line-height: 1.5;
         }
 
         .form-status.success {
@@ -1182,33 +1284,7 @@
            LOS ESPERAMOS (sección final)
            ========================================== */
         .esperamos-section {
-            width: 100%;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 40px;
-            background-color: var(--color-bg);
-            position: relative;
             overflow: hidden;
-        }
-
-        .esperamos-bg-text {
-            position: absolute;
-            inset: 0;
-            font-family: var(--font-hand);
-            font-size: 48px;
-            color: rgba(209, 201, 193, 0.22);
-            overflow: hidden;
-            pointer-events: none;
-            line-height: 1.85;
-            user-select: none;
-        }
-
-        .esperamos-bg-text span {
-            display: block;
-            text-align: center;
-            white-space: nowrap;
         }
 
         .esperamos-container {
@@ -1218,14 +1294,15 @@
             width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: clamp(40px, 7vw, 80px);
             align-items: center;
+            margin: 0 auto;
         }
 
         .esperamos-content {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 24px;
         }
 
         .esperamos-kicker {
@@ -1239,20 +1316,23 @@
 
         .esperamos-names {
             font-family: var(--font-hand);
-            font-size: clamp(64px, 9vw, 120px);
+            font-size: clamp(54px, 9vw, 110px);
             color: var(--color-ink);
-            line-height: 1.05;
+            line-height: 1.1;
             font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
+        /* MISMO font-family, solo color diferente */
         .esperamos-names .amp {
             color: var(--color-accent);
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 0.75em;
-            margin: 0 4px;
+            font-family: var(--font-hand);
+            font-size: 0.85em;
             display: inline-block;
-            vertical-align: middle;
+            margin-right: 8px;
+            line-height: 1;
         }
 
         .esperamos-image {
@@ -1285,7 +1365,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: clamp(20px, 5vw, 50px);
+            gap: clamp(16px, 5vw, 50px);
             height: var(--nav-height);
         }
 
@@ -1325,17 +1405,17 @@
         @media (max-width: 900px) {
             .programa-wrapper {
                 grid-template-columns: 1fr;
-                gap: 60px;
+                gap: 50px;
             }
 
             .detalles-container {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 40px;
                 text-align: center;
             }
 
             .detalles-image img {
-                max-width: 280px;
+                max-width: 260px;
             }
 
             .detalles-list li {
@@ -1344,53 +1424,43 @@
 
             .esperamos-container {
                 grid-template-columns: 1fr;
-                gap: 50px;
+                gap: 40px;
                 text-align: center;
+            }
+
+            .esperamos-names {
+                align-items: center;
             }
 
             .grande-giorno-container {
                 flex-direction: column;
-                gap: 50px;
+                gap: 40px;
             }
 
             .grande-giorno-image {
                 flex: 0 0 auto;
-                width: 320px;
+                width: 280px;
             }
 
             .grande-giorno-content {
                 text-align: center;
             }
 
-            .grande-giorno-text {
-                margin: 0 auto;
-            }
-
             .location-header {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 20px;
-                align-items: flex-start;
+                align-items: center;
             }
 
-            .location-decoration {
-                width: 100px;
-                height: 100px;
+            .banks-grid {
+                grid-template-columns: 1fr;
+                max-width: 520px;
             }
         }
 
         @media (max-width: 768px) {
-            .section,
-            .location-section,
-            .programa-section,
-            .detalles-section,
-            .countdown-section,
-            .rsvp-section,
-            .grande-giorno-section {
-                padding: 70px 24px;
-            }
-
-            .esperamos-section {
-                padding: 70px 24px;
+            .snap {
+                padding: 70px 24px calc(var(--nav-height) + 30px);
             }
 
             .language-toggle {
@@ -1400,28 +1470,34 @@
             }
 
             .decoration {
-                width: 60px;
-                height: 60px;
+                width: 54px;
+                height: 54px;
+            }
+
+            .decoration.cake {
+                left: 3%;
+            }
+
+            .decoration.rings {
+                right: 3%;
             }
 
             .events-container {
-                gap: 40px;
+                gap: 30px;
+                flex-direction: column;
+                align-items: center;
             }
 
             .events-divider {
                 display: none;
             }
 
-            .event-card {
-                flex: 0 1 220px;
-            }
-
-            .event-date {
-                font-size: 42px;
+            .std-description {
+                margin-bottom: 40px;
             }
 
             .location-details {
-                gap: 40px;
+                gap: 28px;
             }
 
             .conditional-row {
@@ -1432,21 +1508,21 @@
                 gap: 24px;
             }
 
-            .timeline-event {
-                font-size: 18px;
-            }
-
             .countdown-display {
-                gap: 20px;
+                gap: 16px;
             }
 
-            .bank-block {
-                padding: 22px 20px;
+            .rsvp-description {
+                margin-bottom: 32px;
+            }
+
+            .rsvp-form {
+                gap: 20px;
             }
 
             .bottom-nav {
                 padding: 12px 14px;
-                gap: 16px;
+                gap: 14px;
             }
 
             .bottom-nav a {
@@ -1457,51 +1533,158 @@
             .bottom-nav a.nav-rsvp {
                 padding: 6px 12px;
             }
+
+            .amore-bg .amore-row {
+                font-size: 36px;
+            }
+
+            .amore-bg .amore-row:nth-child(1) { transform: translateX(-15%); }
+            .amore-bg .amore-row:nth-child(2) { transform: translateX(-35%); }
+            .amore-bg .amore-row:nth-child(3) { transform: translateX(-5%); }
+            .amore-bg .amore-row:nth-child(4) { transform: translateX(-28%); }
+            .amore-bg .amore-row:nth-child(5) { transform: translateX(-12%); }
+            .amore-bg .amore-row:nth-child(6) { transform: translateX(-40%); }
+            .amore-bg .amore-row:nth-child(7) { transform: translateX(-8%); }
         }
 
         @media (max-width: 480px) {
+            .snap {
+                padding: 60px 18px calc(var(--nav-height) + 24px);
+            }
+
             .decoration {
                 display: none;
             }
 
-            .events-container {
-                flex-direction: column;
-                gap: 36px;
+            .envelope-text {
+                max-width: 260px;
             }
 
-            .std-description {
-                margin-bottom: 50px;
+            .envelope-names {
+                font-size: 32px;
             }
 
-            .countdown-number {
-                font-size: 64px;
-            }
-
-            .countdown-label {
+            .save-the-date-label,
+            .envelope-subtitle {
                 font-size: 10px;
+                letter-spacing: 2.5px;
             }
 
-            .esperamos-names {
+            .envelope-dates {
+                font-size: 11px;
+            }
+
+            .showcase-kicker,
+            .showcase-subtitle {
+                font-size: 10px;
+                letter-spacing: 2.5px;
+            }
+
+            .showcase-names {
                 font-size: 56px;
             }
 
+            .std-title {
+                font-size: 36px;
+            }
+
+            .std-description {
+                font-size: 15px;
+                margin-bottom: 32px;
+            }
+
+            .event-date {
+                font-size: 36px;
+            }
+
+            .event-location {
+                font-size: 16px;
+            }
+
+            .countdown-display {
+                gap: 12px;
+            }
+
+            .countdown-number {
+                font-size: 54px;
+            }
+
+            .countdown-label {
+                font-size: 9px;
+                letter-spacing: 2px;
+            }
+
+            .countdown-kicker {
+                margin-bottom: 32px;
+            }
+
+            .location-title {
+                font-size: 44px;
+            }
+
+            .programa-col-title {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .timeline-event {
+                font-size: 16px;
+            }
+
             .dresscode-palette {
-                padding: 16px;
                 gap: 10px;
             }
 
             .palette-swatch {
-                width: 38px;
-                height: 38px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .detalles-title,
+            .esperamos-names {
+                font-size: 48px;
+            }
+
+            .rsvp-title {
+                font-size: 44px;
+                letter-spacing: 5px;
+                padding-left: 5px;
+            }
+
+            .form-input,
+            .form-textarea,
+            .form-select {
+                font-size: 16px; /* evita zoom en iOS */
+                padding: 12px 14px;
+            }
+
+            .form-select {
+                padding-right: 40px;
+            }
+
+            .bank-card {
+                padding: 22px 20px;
+            }
+
+            .bank-card-name {
+                font-size: 20px;
             }
 
             .bottom-nav {
-                gap: 10px;
+                gap: 8px;
             }
 
             .bottom-nav a {
                 font-size: 9px;
                 letter-spacing: 1px;
+            }
+
+            .bottom-nav a.nav-rsvp {
+                padding: 6px 10px;
+            }
+
+            .amore-bg .amore-row {
+                font-size: 28px;
             }
         }
 
@@ -1510,6 +1693,10 @@
             * {
                 animation-duration: 0.01ms !important;
                 transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            html {
+                scroll-snap-type: none;
             }
         }
     </style>
@@ -1528,13 +1715,15 @@
     </div>
 
     <!-- ============================ HERO — SOBRE ============================ -->
-    <section class="hero" id="top">
-        <div class="hero-background-text" aria-hidden="true">
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+    <section class="snap hero" id="top">
+        <div class="amore-bg" aria-hidden="true">
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
+            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
+            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
+            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
         </div>
 
         <div class="decoration cake" aria-hidden="true">
@@ -1546,7 +1735,7 @@
 
         <div class="envelope-wrapper">
             <div class="envelope">
-                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png" alt="Invitación de boda">
+                <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/Sobre-invitacion.png" alt="Vincenzo & Lucia Wedding Invitation">
                 <div class="envelope-text">
                     <div class="save-the-date-label" data-it="SAVE THE DATE" data-es="SAVE THE DATE">SAVE THE DATE</div>
                     <div class="envelope-names">
@@ -1572,12 +1761,15 @@
     </section>
 
     <!-- ============================ NOMBRES GRANDES ============================ -->
-    <section class="names-showcase">
-        <div class="hero-background-text" aria-hidden="true">
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
-            <span>Amore · Amore · Amore · Amore · Amore · Amore · Amore</span>
+    <section class="snap names-showcase">
+        <div class="amore-bg" aria-hidden="true">
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
+            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
+            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
+            <div class="amore-row">ti amo · amore · ti amo · amore · ti amo · amore · ti amo · amore</div>
+            <div class="amore-row">amore · ti amo · amore · ti amo · amore · ti amo · amore · ti amo</div>
         </div>
 
         <div class="decoration cake" aria-hidden="true">
@@ -1590,42 +1782,42 @@
         <div class="names-showcase-content">
             <div class="showcase-kicker" data-it="SIETE INVITATI" data-es="ESTÁN INVITADOS">SIETE INVITATI</div>
             <div class="showcase-names">
-                <span>Vincenzo</span><span class="ampersand">&amp;</span><span>Lucia</span>
+                <span>Vincenzo</span>
+                <span class="ampersand">&amp;</span>
+                <span>Lucia</span>
             </div>
             <div class="showcase-subtitle" data-it="CI SPOSIAMO!" data-es="¡NOS CASAMOS!">CI SPOSIAMO!</div>
         </div>
     </section>
 
     <!-- ============================ SAVE THE DATE ============================ -->
-    <section class="section save-the-date-section" id="save-the-date">
-        <div class="section-inner">
-            <div class="std-container">
-                <h1 class="std-title" data-it="Save the date" data-es="Save the date">Save the date</h1>
-                <p class="std-description"
-                   data-it="Il nostro matrimonio si divide in due momenti speciali. La cerimonia civile sarà a Cesena, Italia, e la festa ufficiale sarà a Maiorca, Spagna. Vi raccontiamo tutto qui sotto!"
-                   data-es="Nuestra boda se divide en dos momentos especiales. La ceremonia civil será en Cesena, Italia, y la fiesta oficial será en Mallorca, España. ¡Os contamos todo aquí abajo!">Il nostro matrimonio si divide in due momenti speciali. La cerimonia civile sarà a Cesena, Italia, e la festa ufficiale sarà a Maiorca, Spagna.</p>
+    <section class="snap save-the-date-section" id="save-the-date">
+        <div class="std-container">
+            <h1 class="std-title" data-it="Save the date" data-es="Save the date">Save the date</h1>
+            <p class="std-description"
+               data-it="Il nostro matrimonio si divide in due momenti speciali. La cerimonia civile sarà a Cesena, Italia, e la festa ufficiale sarà a Maiorca, Spagna."
+               data-es="Nuestra boda se divide en dos momentos especiales. La ceremonia civil será en Cesena, Italia, y la fiesta oficial será en Mallorca, España.">Il nostro matrimonio...</p>
 
-                <div class="events-container">
-                    <div class="event-card">
-                        <div class="event-date">21.06.26</div>
-                        <div class="event-label" data-it="CERIMONIA CIVILE" data-es="CEREMONIA CIVIL">CERIMONIA CIVILE</div>
-                        <div class="event-location" data-it="Cesena, Italia" data-es="Cesena, Italia">Cesena, Italia</div>
-                    </div>
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-date">21.06.26</div>
+                    <div class="event-label" data-it="CERIMONIA CIVILE" data-es="CEREMONIA CIVIL">CERIMONIA CIVILE</div>
+                    <div class="event-location" data-it="Cesena, Italia" data-es="Cesena, Italia">Cesena, Italia</div>
+                </div>
 
-                    <div class="events-divider" aria-hidden="true"></div>
+                <div class="events-divider" aria-hidden="true"></div>
 
-                    <div class="event-card">
-                        <div class="event-date blue">04.07.26</div>
-                        <div class="event-label" data-it="FESTA!" data-es="PARTY!">FESTA!</div>
-                        <div class="event-location" data-it="Maiorca, Spagna" data-es="Mallorca, España">Maiorca, Spagna</div>
-                    </div>
+                <div class="event-card">
+                    <div class="event-date blue">04.07.26</div>
+                    <div class="event-label" data-it="FESTA!" data-es="PARTY!">FESTA!</div>
+                    <div class="event-location" data-it="Maiorca, Spagna" data-es="Mallorca, España">Maiorca, Spagna</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================ IL GRANDE GIORNO ============================ -->
-    <section class="grande-giorno-section" id="grande-giorno">
+    <section class="snap grande-giorno-section" id="grande-giorno">
         <div class="grande-giorno-container">
             <div class="grande-giorno-image">
                 <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/pareja%20foto%20intermedio.JPG" alt="Vincenzo y Lucia">
@@ -1640,7 +1832,7 @@
     </section>
 
     <!-- ============================ LOCATION ITALIA ============================ -->
-    <section class="location-section section-alt" id="location-italia">
+    <section class="snap location-section" id="location-italia">
         <div class="location-wrapper">
             <div class="location-header">
                 <h2 class="location-title" data-it="Italia" data-es="Italia">Italia</h2>
@@ -1681,7 +1873,7 @@
     </section>
 
     <!-- ============================ LOCATION ESPAÑA ============================ -->
-    <section class="location-section" id="location-espana">
+    <section class="snap location-section" id="location-espana">
         <div class="location-wrapper">
             <div class="location-header">
                 <h2 class="location-title" data-it="Spagna" data-es="España">Spagna</h2>
@@ -1722,14 +1914,13 @@
     </section>
 
     <!-- ============================ COUNTDOWN ============================ -->
-    <section class="countdown-section section-alt" id="countdown">
+    <section class="snap countdown-section" id="countdown">
         <div class="countdown-kicker" data-it="QUANTO MANCA ALLA FESTA" data-es="CUÁNTO FALTA PARA EL PARTY">QUANTO MANCA ALLA FESTA</div>
 
-        <div class="countdown-display" id="countdown">
+        <div class="countdown-display">
             <div class="countdown-unit">
                 <div class="countdown-circle-wrapper" aria-hidden="true">
                     <svg viewBox="0 0 200 130" preserveAspectRatio="none">
-                        <!-- Círculo dibujado a mano con dos vueltas superpuestas -->
                         <path d="M 100 18
                                  C 155 18, 188 40, 188 66
                                  C 188 95, 150 115, 100 115
@@ -1761,7 +1952,7 @@
     </section>
 
     <!-- ============================ PROGRAMA + DRESS CODE ============================ -->
-    <section class="programa-section" id="programa">
+    <section class="snap programa-section" id="programa">
         <div class="programa-wrapper">
             <div class="programa-col">
                 <h2 class="programa-col-title" data-it="Programma" data-es="Programa">Programma</h2>
@@ -1820,7 +2011,7 @@
     </section>
 
     <!-- ============================ ALGUNOS DETALLES ============================ -->
-    <section class="detalles-section section-alt" id="detalles">
+    <section class="snap detalles-section" id="detalles">
         <div class="detalles-container">
             <div class="detalles-image">
                 <img src="https://raw.githubusercontent.com/lupallas/boda-lucia-vincenzo/boda/brindis.png" alt="Copas de brindis">
@@ -1830,36 +2021,66 @@
                 <h2 class="detalles-title" data-it="alcuni dettagli..." data-es="algunos detalles...">alcuni dettagli...</h2>
 
                 <ul class="detalles-list">
-                    <li data-it="I regali sono un'opportunità per contribuire al nostro nuovo capitolo. Troverete i dati bancari qui sotto."
-                        data-es="Los regalos son una oportunidad para contribuir a nuestro nuevo capítulo. Encontraréis los datos bancarios a continuación.">Los regalos son una oportunidad para contribuir a nuestro nuevo capítulo. Encontraréis los datos bancarios a continuación.</li>
+                    <li data-it="I regali sono un'opportunità per contribuire al nostro nuovo capitolo. Troverete i dati bancari nella sezione successiva."
+                        data-es="Los regalos son una oportunidad para contribuir a nuestro nuevo capítulo. Encontraréis los datos bancarios en la siguiente sección.">Los regalos son una oportunidad para contribuir a nuestro nuevo capítulo.</li>
                     <li data-it="Il microfono sarà aperto per chi vorrà condividere qualche parola o una storia durante la celebrazione."
-                        data-es="El micrófono estará abierto para quien quiera compartir unas palabras o una historia durante la celebración.">El micrófono estará abierto para quien quiera compartir unas palabras o una historia durante la celebración.</li>
-                    <li data-it="Vogliamo approfittare al massimo del tempo che avremo per stare insieme. In base alle persone presenti in ogni momento, organizzeremo incontri come picnic, spiaggia e altre attività. Vi terremo informati."
-                        data-es="Queremos aprovechar al máximo el tiempo que tendremos para estar con vosotros. En función de las personas presentes en cada momento, organizaremos encuentros como picnic, playa y otras actividades. Os mantendremos informados.">Queremos aprovechar al máximo el tiempo...</li>
+                        data-es="El micrófono estará abierto para quien quiera compartir unas palabras o una historia durante la celebración.">El micrófono estará abierto...</li>
+                    <li data-it="Vogliamo approfittare al massimo del tempo che avremo per stare insieme. In base alle persone presenti, organizzeremo incontri come picnic, spiaggia e altre attività. Vi terremo informati."
+                        data-es="Queremos aprovechar al máximo el tiempo que tendremos para estar con vosotros. En función de las personas presentes, organizaremos encuentros como picnic, playa y otras actividades. Os mantendremos informados.">Queremos aprovechar al máximo...</li>
                     <li data-it="La vostra presenza è la cosa più importante per noi. Sappiamo che non è sempre facile essere fisicamente presenti, ma sarete con noi in ogni momento."
-                        data-es="Vuestra presencia es lo más importante para nosotros. Sabemos que no siempre es fácil estar físicamente presentes, pero estaréis con nosotros en cada momento.">Vuestra presencia es lo más importante para nosotros.</li>
+                        data-es="Vuestra presencia es lo más importante para nosotros. Sabemos que no siempre es fácil estar físicamente presentes, pero estaréis con nosotros en cada momento.">Vuestra presencia es lo más importante...</li>
                 </ul>
+            </div>
+        </div>
+    </section>
 
-                <div class="bank-block">
-                    <div class="bank-title" data-it="DATI BANCARI" data-es="DATOS BANCARIOS">DATI BANCARI</div>
-                    <div class="bank-details">
-                        <strong data-it="Intestatario:" data-es="Titular:">Intestatario:</strong> Lucia Pallas &amp; Vincenzo<br>
-                        <strong data-it="IBAN:" data-es="IBAN:">IBAN:</strong> <span class="bank-iban">ES00 0000 0000 0000 0000 0000</span><br>
-                        <strong data-it="Banca:" data-es="Banco:">Banca:</strong> <span data-it="(da completare)" data-es="(por completar)">(da completare)</span>
+    <!-- ============================ REGALI / DATI BANCARI ============================ -->
+    <section class="snap regali-section" id="regali">
+        <div class="regali-wrapper">
+            <div class="regali-kicker" data-it="REGALI" data-es="REGALOS">REGALI</div>
+            <h2 class="regali-title" data-it="dati bancari" data-es="datos bancarios">dati bancari</h2>
+            <p class="regali-intro"
+               data-it="Se desiderate contribuire al nostro nuovo capitolo, qui trovate i nostri dati bancari. Ogni gesto, grande o piccolo, è ricevuto con infinita gratitudine."
+               data-es="Si deseáis contribuir a nuestro nuevo capítulo, aquí tenéis nuestros datos bancarios. Cada gesto, grande o pequeño, lo recibimos con infinita gratitud.">Si deseáis contribuir...</p>
+
+            <div class="banks-grid">
+                <div class="bank-card">
+                    <div class="bank-card-name">Lucia Pallas</div>
+                    <div class="bank-card-field">
+                        <div class="bank-card-label">IBAN</div>
+                        <div class="bank-card-value" id="iban-lucia">ES64 2100 3345 4107 0002 6703</div>
                     </div>
+                    <div class="bank-card-field">
+                        <div class="bank-card-label" data-it="BANCA" data-es="BANCO">BANCA</div>
+                        <div class="bank-card-bank">CaixaBank</div>
+                    </div>
+                    <button class="copy-iban" data-target="iban-lucia" data-it="COPIA IBAN" data-es="COPIAR IBAN">COPIA IBAN</button>
+                </div>
+
+                <div class="bank-card">
+                    <div class="bank-card-name">Vincenzo Saverino</div>
+                    <div class="bank-card-field">
+                        <div class="bank-card-label">IBAN</div>
+                        <div class="bank-card-value" id="iban-vincenzo">BE82 9051 0867 5268</div>
+                    </div>
+                    <div class="bank-card-field">
+                        <div class="bank-card-label" data-it="BANCA" data-es="BANCO">BANCA</div>
+                        <div class="bank-card-bank">Wise Bank</div>
+                    </div>
+                    <button class="copy-iban" data-target="iban-vincenzo" data-it="COPIA IBAN" data-es="COPIAR IBAN">COPIA IBAN</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================ RSVP FORM ============================ -->
-    <section class="rsvp-section" id="rsvp">
+    <section class="snap rsvp-section" id="rsvp">
         <div class="rsvp-container">
             <div class="rsvp-kicker" data-it="CONFERMA LA TUA PRESENZA" data-es="CONFIRMA TU ASISTENCIA">CONFERMA LA TUA PRESENZA</div>
-            <h2 class="rsvp-title" data-it="RSVP" data-es="RSVP">RSVP</h2>
+            <h2 class="rsvp-title">RSVP</h2>
             <p class="rsvp-description"
-               data-it="Ogni adulto dovrebbe compilare il modulo una volta. Se viaggi con bambini o neonati, indicalo nel messaggio finale. Ti preghiamo di rispondere entro il 1° maggio 2026."
-               data-es="Cada adulto debería rellenar el formulario una vez. Si viajas con niños o bebés, indícalo en el mensaje final. Por favor responde antes del 1 de mayo de 2026.">Cada adulto debería rellenar el formulario una vez...</p>
+               data-it="Ogni adulto dovrebbe compilare il modulo una volta. Se viaggi con bambini o neonati, indicalo nel messaggio finale."
+               data-es="Cada adulto debería rellenar el formulario una vez. Si viajas con niños o bebés, indícalo en el mensaje final.">Cada adulto debería rellenar el formulario...</p>
 
             <form class="rsvp-form" id="rsvpForm" novalidate>
                 <!-- Nombre -->
@@ -1871,34 +2092,19 @@
                     <input type="text" class="form-input" id="rsvp-name" name="name" required autocomplete="name">
                 </div>
 
-                <!-- Asistencia -->
+                <!-- Asistencia - DROPDOWN -->
                 <div class="form-group">
-                    <label class="form-label">
+                    <label class="form-label" for="rsvp-attendance">
                         <span data-it="PARTECIPAZIONE" data-es="ASISTENCIA">PARTECIPAZIONE</span>
                         <span class="required">*</span>
                     </label>
-                    <div class="form-radio-group" id="attendance-group">
-                        <label class="form-radio-option">
-                            <input type="radio" name="attendance" value="both" required>
-                            <span class="form-radio-custom"></span>
-                            <span class="form-radio-label" data-it="A entrambi gli eventi (Italia + Spagna)" data-es="A ambos eventos (Italia + España)">A entrambi gli eventi (Italia + Spagna)</span>
-                        </label>
-                        <label class="form-radio-option">
-                            <input type="radio" name="attendance" value="italy" required>
-                            <span class="form-radio-custom"></span>
-                            <span class="form-radio-label" data-it="Solo in Italia (Cesena)" data-es="Solo en Italia (Cesena)">Solo in Italia (Cesena)</span>
-                        </label>
-                        <label class="form-radio-option">
-                            <input type="radio" name="attendance" value="mallorca" required>
-                            <span class="form-radio-custom"></span>
-                            <span class="form-radio-label" data-it="Solo a Maiorca (Spagna)" data-es="Solo en Mallorca (España)">Solo a Maiorca (Spagna)</span>
-                        </label>
-                        <label class="form-radio-option">
-                            <input type="radio" name="attendance" value="none" required>
-                            <span class="form-radio-custom"></span>
-                            <span class="form-radio-label" data-it="Non potrò partecipare" data-es="No podré asistir">Non potrò partecipare</span>
-                        </label>
-                    </div>
+                    <select class="form-select" id="rsvp-attendance" name="attendance" required>
+                        <option value="" disabled selected data-it="— Seleziona un'opzione —" data-es="— Selecciona una opción —">— Seleziona un'opzione —</option>
+                        <option value="both" data-it="A entrambi gli eventi (Italia + Spagna)" data-es="A ambos eventos (Italia + España)">A entrambi gli eventi (Italia + Spagna)</option>
+                        <option value="italy" data-it="Solo in Italia (Cesena)" data-es="Solo en Italia (Cesena)">Solo in Italia (Cesena)</option>
+                        <option value="mallorca" data-it="Solo a Maiorca (Spagna)" data-es="Solo en Mallorca (España)">Solo a Maiorca (Spagna)</option>
+                        <option value="none" data-it="Non potrò partecipare" data-es="No podré asistir">Non potrò partecipare</option>
+                    </select>
                 </div>
 
                 <!-- Intolerancias -->
@@ -1955,13 +2161,15 @@
     </section>
 
     <!-- ============================ LOS ESPERAMOS ============================ -->
-    <section class="esperamos-section" id="los-esperamos">
-        <div class="esperamos-bg-text" aria-hidden="true">
-            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
-            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
-            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
-            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
-            <span>ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</span>
+    <section class="snap esperamos-section" id="los-esperamos">
+        <div class="amore-bg" aria-hidden="true">
+            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
+            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
+            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
+            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
+            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
+            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
+            <div class="amore-row">ti amo · ti amo · ti amo · ti amo · ti amo · ti amo</div>
         </div>
 
         <div class="esperamos-container">
@@ -1969,7 +2177,7 @@
                 <div class="esperamos-kicker" data-it="VI ASPETTIAMO!" data-es="¡OS ESPERAMOS!">VI ASPETTIAMO!</div>
                 <div class="esperamos-names">
                     <div>Vincenzo</div>
-                    <div><span class="amp">&amp;</span> Lucia</div>
+                    <div><span class="amp">&amp;</span>Lucia</div>
                 </div>
             </div>
             <div class="esperamos-image">
@@ -1982,7 +2190,7 @@
     <nav class="bottom-nav" aria-label="Navegación principal">
         <a href="#save-the-date" data-it="LOCATION" data-es="LOCATION">LOCATION</a>
         <a href="#programa" data-it="DRESS CODE" data-es="DRESS CODE">DRESS CODE</a>
-        <a href="#detalles" data-it="REGALI" data-es="REGALI">REGALI</a>
+        <a href="#regali" data-it="REGALI" data-es="REGALOS">REGALI</a>
         <a href="#rsvp" class="nav-rsvp" data-it="RSVP" data-es="RSVP">RSVP</a>
     </nav>
 
@@ -2025,12 +2233,10 @@
         })();
 
         // ========================================
-        // COUNTDOWN — target: 4 julio 2026, 18:00 (Madrid/CEST)
+        // COUNTDOWN — target: 4 julio 2026, 18:00 CEST
         // ========================================
         (function() {
-            // 18:00 CEST = 16:00 UTC (julio = horario de verano en España)
             const target = new Date('2026-07-04T16:00:00Z').getTime();
-
             const elDays = document.getElementById('cd-days');
             const elHours = document.getElementById('cd-hours');
             const elMinutes = document.getElementById('cd-minutes');
@@ -2041,7 +2247,6 @@
             function updateCountdown() {
                 const now = Date.now();
                 const diff = target - now;
-
                 if (diff <= 0) {
                     elDays.textContent = '00';
                     elHours.textContent = '00';
@@ -2049,12 +2254,10 @@
                     elSeconds.textContent = '00';
                     return;
                 }
-
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
+                const days = Math.floor(diff / 86400000);
+                const hours = Math.floor((diff % 86400000) / 3600000);
+                const minutes = Math.floor((diff % 3600000) / 60000);
+                const seconds = Math.floor((diff % 60000) / 1000);
                 elDays.textContent = pad(days);
                 elHours.textContent = pad(hours);
                 elMinutes.textContent = pad(minutes);
@@ -2066,38 +2269,69 @@
         })();
 
         // ========================================
+        // COPY IBAN BUTTONS
+        // ========================================
+        (function() {
+            document.querySelectorAll('.copy-iban').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const targetId = btn.dataset.target;
+                    const targetEl = document.getElementById(targetId);
+                    if (!targetEl) return;
+                    const ibanValue = targetEl.textContent.replace(/\s+/g, '');
+                    const lang = localStorage.getItem('weddingLang') || 'it';
+                    const copiedLabel = lang === 'es' ? '✓ COPIADO' : '✓ COPIATO';
+                    const originalLabel = btn.textContent;
+                    try {
+                        await navigator.clipboard.writeText(ibanValue);
+                        btn.textContent = copiedLabel;
+                        btn.classList.add('copied');
+                        setTimeout(() => {
+                            btn.textContent = originalLabel;
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        // Fallback para navegadores sin clipboard API
+                        const textArea = document.createElement('textarea');
+                        textArea.value = ibanValue;
+                        textArea.style.position = 'fixed';
+                        textArea.style.opacity = '0';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        try { document.execCommand('copy'); } catch {}
+                        document.body.removeChild(textArea);
+                        btn.textContent = copiedLabel;
+                        btn.classList.add('copied');
+                        setTimeout(() => {
+                            btn.textContent = originalLabel;
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    }
+                });
+            });
+        })();
+
+        // ========================================
         // RSVP FORM
         // ========================================
         (function() {
             const form = document.getElementById('rsvpForm');
             if (!form) return;
 
-            const attendanceGroup = document.getElementById('attendance-group');
             const mallorcaDates = document.getElementById('mallorca-dates');
             const submitBtn = document.getElementById('rsvpSubmit');
             const statusEl = document.getElementById('formStatus');
+            const attendanceSelect = document.getElementById('rsvp-attendance');
 
-            // URL del Google Apps Script
             const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQD6oZmV7iX16SYi6nFDwlkfGBzhWZupJnw-C2ItpOC2ckUcPtafG3LJSys0kNEaZG/exec';
 
-            // Show/hide Mallorca dates based on attendance selection + visual selected state
-            const radioOptions = document.querySelectorAll('.form-radio-option');
-            const radios = form.querySelectorAll('input[name="attendance"]');
-
-            radios.forEach(radio => {
-                radio.addEventListener('change', () => {
-                    // visual state
-                    radioOptions.forEach(opt => opt.classList.remove('selected'));
-                    radio.closest('.form-radio-option').classList.add('selected');
-
-                    // conditional mallorca block
-                    const val = radio.value;
-                    if (val === 'both' || val === 'mallorca') {
-                        mallorcaDates.classList.add('active');
-                    } else {
-                        mallorcaDates.classList.remove('active');
-                    }
-                });
+            // Mostrar/ocultar fechas Mallorca según selección
+            attendanceSelect.addEventListener('change', () => {
+                const val = attendanceSelect.value;
+                if (val === 'both' || val === 'mallorca') {
+                    mallorcaDates.classList.add('active');
+                } else {
+                    mallorcaDates.classList.remove('active');
+                }
             });
 
             function showStatus(message, type) {
@@ -2116,7 +2350,6 @@
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                // Validación mínima
                 const name = form.name.value.trim();
                 const attendance = form.attendance.value;
 
@@ -2135,7 +2368,6 @@
                 statusEl.className = 'form-status';
                 statusEl.textContent = '';
 
-                // Mapeo de valores a texto legible para la hoja
                 const attendanceMap = {
                     'both': t('Entrambi gli eventi', 'Ambos eventos'),
                     'italy': t('Solo Italia (Cesena)', 'Solo Italia (Cesena)'),
@@ -2155,7 +2387,6 @@
                 };
 
                 try {
-                    // Enviar como FormData para evitar CORS preflight
                     const formData = new FormData();
                     Object.keys(payload).forEach(key => {
                         formData.append(key, payload[key]);
@@ -2166,7 +2397,6 @@
                         body: formData
                     });
 
-                    // Apps Script a veces devuelve text/plain, intentamos parsear JSON si se puede
                     const text = await response.text();
                     let result;
                     try { result = JSON.parse(text); } catch { result = { status: 'ok' }; }
@@ -2178,7 +2408,6 @@
                             'success'
                         );
                         form.reset();
-                        radioOptions.forEach(opt => opt.classList.remove('selected'));
                         mallorcaDates.classList.remove('active');
                     } else {
                         throw new Error(result.error || 'Unknown error');
