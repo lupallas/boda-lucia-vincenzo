@@ -195,32 +195,54 @@
             overflow: hidden;
         }
 
-        /* Decoraciones laterales */
+        /* Decoraciones detrás del sobre (parcialmente tapadas) */
         .decoration {
             position: absolute;
-            width: 100px;
-            height: 100px;
-            opacity: 0.9;
-            z-index: 2;
+            width: clamp(140px, 18vw, 220px);
+            height: clamp(140px, 18vw, 220px);
+            opacity: 0.95;
+            z-index: 2; /* detrás del sobre (z-index: 10) */
             pointer-events: none;
         }
 
+        /* Torta: asoma desde detrás del borde izquierdo-inferior del sobre */
         .decoration.cake {
-            left: 5%;
+            left: 50%;
             top: 50%;
-            transform: translateY(-50%);
+            /* desplazada hacia la esquina inferior izquierda del sobre */
+            transform: translate(-130%, 10%);
         }
 
+        /* Anillos: asoman desde detrás del borde derecho-inferior del sobre */
         .decoration.rings {
-            right: 5%;
+            left: 50%;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translate(30%, 5%);
         }
 
         .decoration img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+
+        /* En names-showcase las decoraciones van a los lados (no detrás) */
+        .names-showcase .decoration {
+            width: clamp(80px, 10vw, 110px);
+            height: clamp(80px, 10vw, 110px);
+        }
+
+        .names-showcase .decoration.cake {
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .names-showcase .decoration.rings {
+            left: auto;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         /* Contenedor del sobre */
@@ -238,7 +260,7 @@
         }
 
         .envelope {
-            width: min(680px, 88vw);
+            width: min(600px, 82vw);
             aspect-ratio: 1.357 / 1;
             position: relative;
         }
@@ -302,35 +324,6 @@
             text-transform: uppercase;
             color: var(--color-accent);
             font-weight: 600;
-        }
-
-        /* Hint de scroll */
-        .scroll-hint {
-            position: absolute;
-            bottom: calc(var(--nav-height) + 24px);
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            color: var(--color-ink-faint);
-            font-family: var(--font-sans);
-            font-size: 10px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            animation: scrollBounce 2s ease-in-out infinite;
-            z-index: 5;
-        }
-
-        .scroll-hint svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
-            50% { transform: translate(-50%, 6px); opacity: 1; }
         }
 
         /* ==========================================
@@ -1463,17 +1456,27 @@
                 padding: 5px 8px;
             }
 
-            .decoration {
+            /* En names-showcase las decoraciones laterales se reducen */
+            .names-showcase .decoration {
                 width: 54px;
                 height: 54px;
             }
 
-            .decoration.cake {
+            .names-showcase .decoration.cake {
                 left: 3%;
             }
 
-            .decoration.rings {
+            .names-showcase .decoration.rings {
                 right: 3%;
+            }
+
+            /* En el hero, las decoraciones detrás del sobre se acercan más */
+            .hero .decoration.cake {
+                transform: translate(-110%, 15%);
+            }
+
+            .hero .decoration.rings {
+                transform: translate(10%, 10%);
             }
 
             .events-container {
@@ -1534,8 +1537,23 @@
                 padding: 60px 18px calc(var(--nav-height) + 24px);
             }
 
-            .decoration {
+            /* Solo ocultar decoraciones del names-showcase en móviles muy pequeños */
+            .names-showcase .decoration {
                 display: none;
+            }
+
+            /* En el hero mantenerlas pero más pequeñas y más cerca del sobre */
+            .hero .decoration {
+                width: 100px;
+                height: 100px;
+            }
+
+            .hero .decoration.cake {
+                transform: translate(-95%, 20%);
+            }
+
+            .hero .decoration.rings {
+                transform: translate(-5%, 15%);
             }
 
             .envelope-text {
@@ -1719,13 +1737,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="scroll-hint" aria-hidden="true">
-            <span data-it="SCOPRI" data-es="DESCUBRE">SCOPRI</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M7 10l5 5 5-5"></path>
-            </svg>
-        </div>
     </section>
 
     <!-- ============================ NOMBRES GRANDES ============================ -->
@@ -1818,7 +1829,7 @@
                         <p class="detail-value" data-it="Sala degli Specchi, Comune di Cesena" data-es="Sala degli Specchi, Comune di Cesena">Sala degli Specchi, Comune di Cesena</p>
                     </div>
 
-                    <a href="https://share.google/2dDdSphosntgqX9tW" target="_blank" rel="noopener" class="btn-arrivare">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Comune+di+Cesena+Piazza+del+Popolo&query_place_id=ChIJTTVExsekLBMRMB1uYAlngnM" target="_blank" rel="noopener" class="btn-arrivare">
                         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
